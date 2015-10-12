@@ -1,22 +1,19 @@
 <?php
 
-namespace Annuaire\AnnuaireBundle\Entity;
+namespace Annuaire\BienEtreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Annuaire\BienEtreBundle\Entity\Commentaire;
+use Annuaire\BienEtreBundle\Entity\User;
 
 /**
  * Abus
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\Entity\AbusRepository")
+ * @ORM\Table("abus")
+ * @ORM\Entity(repositoryClass="Annuaire\BienEtreBundle\Entity\AbusRepository")
  */
-class Abus
-{
-    
-    
-    public function __construct() {
-        $this->date = new \DateTime();        
-    }
+class Abus {
+
     /**
      * @var integer
      *
@@ -29,25 +26,35 @@ class Abus
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="encodage", type="date")
      */
-    private $date;
+    private $encodage;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Annuaire\BienEtreBundle\Entity\User")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Annuaire\BienEtreBundle\Entity\Commentaire")
+     *  @ORM\JoinColumn(name="user", referencedColumnName="id")
+     */
+    private $commentaire;
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -55,11 +62,9 @@ class Abus
      * Set description
      *
      * @param string $description
-     *
      * @return Abus
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
 
         return $this;
@@ -68,35 +73,31 @@ class Abus
     /**
      * Get description
      *
-     * @return string
+     * @return string 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
     /**
-     * Set date
+     * Set encodage
      *
-     * @param \DateTime $date
-     *
+     * @param \DateTime $encodage
      * @return Abus
      */
-    public function setDate($date)
-    {
-        $this->date = $date;
+    public function setEncodage($encodage) {
+        $this->encodage = $encodage;
 
         return $this;
     }
 
     /**
-     * Get date
+     * Get encodage
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
-    public function getDate()
-    {
-        return $this->date;
+    public function getEncodage() {
+        return $this->encodage;
     }
-}
 
+}
