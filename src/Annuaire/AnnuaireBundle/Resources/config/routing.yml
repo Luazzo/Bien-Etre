@@ -1,0 +1,3 @@
+annuaire_annuaire_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AnnuaireAnnuaireBundle:Default:index }
