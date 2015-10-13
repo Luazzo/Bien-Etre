@@ -20,6 +20,14 @@ class Stage
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var Prestataire
+     *
+     * @ORM\ManyToOne(targetEntity="Prestataire", inversedBy="stages")
+     * @ORM\JoinColumn(name="prestataire", referencedColumnName="id")
+     */
+    private $prestataire;
 
     /**
      * @var string
@@ -279,5 +287,28 @@ class Stage
     {
         return $this->datefinaffiche;
     }
-}
 
+    /**
+     * Set prestataire
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire
+     *
+     * @return Stage
+     */
+    public function setPrestataire(\Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire = null)
+    {
+        $this->prestataire = $prestataire;
+
+        return $this;
+    }
+
+    /**
+     * Get prestataire
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Prestataire
+     */
+    public function getPrestataire()
+    {
+        return $this->prestataire;
+    }
+}

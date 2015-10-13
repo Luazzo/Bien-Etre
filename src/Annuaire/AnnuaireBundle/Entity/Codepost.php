@@ -42,6 +42,7 @@ class Codepost
     /**
      * Set code
      *
+     * 
      * @param string $code
      *
      * @return Codepost
@@ -62,5 +63,6 @@ class Codepost
     {
         return $this->code;
     }
+    
+    
 }
-

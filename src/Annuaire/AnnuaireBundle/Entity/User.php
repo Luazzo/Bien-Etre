@@ -2,21 +2,25 @@
 
 namespace Annuaire\AnnuaireBundle\Entity;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use \Doctrine\ORM\Mapping as ORM;
+
+
 
 /**
  * @ORM\Table()
- * @ORM\Entity()
- * @ORM\MappedSuperclass
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="type_user", type="string")
- * @DiscriminatorMap({"admin" = "User", "membre" = "Membre", "prestataire" = "Prestataire"})
+ * @ORM\Entity(repositoryClass="UserRepository")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type_user", type="string")
+ * @ORM\DiscriminatorMap({"admin" = "User", "membre" = "Membre", "prestataire" = "Prestataire"})
  */
 class User
 {
     public function __construct() {
-        $this->dateInscr = new \DateTime();        
+        $this->dateInscr = new DateTime(); 
+        $this->categories = new ArrayCollection();       
     }
-
         
     /**
      * @var integer
@@ -26,6 +30,29 @@ class User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Codepost")
+     * @ORM\JoinColumn(name="codepostal_id", referencedColumnName="id")
+     */
+    protected $codepost_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Commune")
+     * @ORM\JoinColumn(name="commune_id", referencedColumnName="id")
+     */
+    protected $commune_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Localite")
+     * @ORM\JoinColumn(name="localite_id", referencedColumnName="id")
+     */
+    protected $localite_id;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="User", cascade={"persist"})
+     */
+    protected $categories;
 
     /**
      * @var string
@@ -42,9 +69,8 @@ class User
     protected $prenom;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="avatar", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"})     * 
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      */
     protected $avatar;
 
@@ -56,7 +82,7 @@ class User
     protected $motPass;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="dateInscr", type="datetime")
      */
@@ -65,7 +91,6 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="type_user", type="string", length=255)
      */
     protected $typeuser;
 
@@ -221,7 +246,7 @@ class User
     /**
      * Set dateInscr
      *
-     * @param \DateTime $dateInscr
+     * @param DateTime $dateInscr
      *
      * @return User
      */
@@ -235,7 +260,7 @@ class User
     /**
      * Get dateInscr
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateInscr()
     {
@@ -409,5 +434,110 @@ class User
     {
         return $this->numero;
     }
-}
 
+    /**
+     * Set codepostId
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Codepost $codepostId
+     *
+     * @return User
+     */
+    public function setCodepostId(\Annuaire\AnnuaireBundle\Entity\Codepost $codepostId = null)
+    {
+        $this->codepost_id = $codepostId;
+
+        return $this;
+    }
+
+    /**
+     * Get codepostId
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Codepost
+     */
+    public function getCodepostId()
+    {
+        return $this->codepost_id;
+    }
+
+    /**
+     * Set communeId
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Commune $communeId
+     *
+     * @return User
+     */
+    public function setCommuneId(\Annuaire\AnnuaireBundle\Entity\Commune $communeId = null)
+    {
+        $this->commune_id = $communeId;
+
+        return $this;
+    }
+
+    /**
+     * Get communeId
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Commune
+     */
+    public function getCommuneId()
+    {
+        return $this->commune_id;
+    }
+
+    /**
+     * Set localiteId
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Localite $localiteId
+     *
+     * @return User
+     */
+    public function setLocaliteId(\Annuaire\AnnuaireBundle\Entity\Localite $localiteId = null)
+    {
+        $this->localite_id = $localiteId;
+
+        return $this;
+    }
+
+    /**
+     * Get localiteId
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Localite
+     */
+    public function getLocaliteId()
+    {
+        return $this->localite_id;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\User $category
+     *
+     * @return User
+     */
+    public function addCategory(\Annuaire\AnnuaireBundle\Entity\User $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\User $category
+     */
+    public function removeCategory(\Annuaire\AnnuaireBundle\Entity\User $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+}

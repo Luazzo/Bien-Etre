@@ -20,6 +20,14 @@ class Promo
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var Prestataire
+     *
+     * @ORM\ManyToOne(targetEntity="Prestataire", inversedBy="promos")
+     * @ORM\JoinColumn(name="prestataire", referencedColumnName="id")
+     */
+    private $prestataire;
 
     /**
      * @var string
@@ -248,5 +256,28 @@ class Promo
     {
         return $this->datefinaffiche;
     }
-}
 
+    /**
+     * Set prestataire
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire
+     *
+     * @return Promo
+     */
+    public function setPrestataire(\Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire = null)
+    {
+        $this->prestataire = $prestataire;
+
+        return $this;
+    }
+
+    /**
+     * Get prestataire
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Prestataire
+     */
+    public function getPrestataire()
+    {
+        return $this->prestataire;
+    }
+}

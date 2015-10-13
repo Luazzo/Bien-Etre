@@ -1,14 +1,14 @@
-<?php
+<?php 
 
 namespace Annuaire\AnnuaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+//
 /**
  * Image
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\Entity\ImageRepository")
+ * @ORM\Table(name="images")
+ * @ORM\Entity
  */
 class Image
 {
@@ -249,4 +249,3 @@ class Image
         return $this->visible;
     }
 }
-

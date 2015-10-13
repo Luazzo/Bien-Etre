@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Categorie
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\Entity\CategorieRepository")
+ * @ORM\Table(name="categorie")
+ * @ORM\Entity(repositoryClass="CategorieRepository")
  */
 class Categorie
 {
@@ -156,4 +156,3 @@ class Categorie
         return $this->valide;
     }
 }
-

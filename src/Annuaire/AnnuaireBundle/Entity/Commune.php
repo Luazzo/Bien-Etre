@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commune
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\Entity\CommuneRepository")
+ * @ORM\Table(name="commune")
+ * @ORM\Entity
  */
 class Commune
 {
@@ -63,4 +63,3 @@ class Commune
         return $this->commune;
     }
 }
-

@@ -25,6 +25,22 @@ class Abus
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var Comment
+     *
+     * @ORM\ManyToOne(targetEntity="Comment")
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
+     */
+    private $comment_id;    
+    
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user_id;
 
     /**
      * @var string
@@ -98,5 +114,52 @@ class Abus
     {
         return $this->date;
     }
-}
 
+    /**
+     * Set commentId
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Comment $commentId
+     *
+     * @return Abus
+     */
+    public function setCommentId(\Annuaire\AnnuaireBundle\Entity\Comment $commentId = null)
+    {
+        $this->comment_id = $commentId;
+
+        return $this;
+    }
+
+    /**
+     * Get commentId
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Comment
+     */
+    public function getCommentId()
+    {
+        return $this->comment_id;
+    }
+
+    /**
+     * Set userId
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\User $userId
+     *
+     * @return Abus
+     */
+    public function setUserId(\Annuaire\AnnuaireBundle\Entity\User $userId = null)
+    {
+        $this->user_id = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\User
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+}

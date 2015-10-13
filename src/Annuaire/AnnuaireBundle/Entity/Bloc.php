@@ -20,6 +20,14 @@ class Bloc
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user_id;
 
     /**
      * @var string
@@ -93,5 +101,28 @@ class Bloc
     {
         return $this->description;
     }
-}
 
+    /**
+     * Set userId
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\User $userId
+     *
+     * @return Bloc
+     */
+    public function setUserId(\Annuaire\AnnuaireBundle\Entity\User $userId = null)
+    {
+        $this->user_id = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\User
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+}

@@ -2,18 +2,27 @@
 
 namespace Annuaire\AnnuaireBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 /**
  * Localite
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\Entity\LocaliteRepository")
  */
 class Localite
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
+     * @var 
+     * @ORM\Column(name="localite", type="string", length=128)
      */
     private $localite;
 
@@ -52,4 +61,3 @@ class Localite
         return $this->localite;
     }
 }
-

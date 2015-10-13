@@ -133,5 +133,28 @@ class Comment
     {
         return $this->date;
     }
-}
 
+    /**
+     * Set membre
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Membre $membre
+     *
+     * @return Comment
+     */
+    public function setMembre(\Annuaire\AnnuaireBundle\Entity\Membre $membre = null)
+    {
+        $this->membre = $membre;
+
+        return $this;
+    }
+
+    /**
+     * Get membre
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Membre
+     */
+    public function getMembre()
+    {
+        return $this->membre;
+    }
+}
