@@ -3,6 +3,7 @@
 namespace Annuaire\AnnuaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Codepost
@@ -12,6 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Codepost
 {
+    
+    public function __construct() {
+        $this->localites = new ArrayCollection();    
+    }
     /**
      * @var integer
      *
@@ -20,6 +25,12 @@ class Codepost
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Annuaire\AnnuaireBundle\Entity\Localite", mappedBy="codepost")
+     */
+     private $localites; 
 
     /**
      * @var string
@@ -65,4 +76,38 @@ class Codepost
     }
     
     
+
+    /**
+     * Add localite
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Localite $localite
+     *
+     * @return Codepost
+     */
+    public function addLocalite(\Annuaire\AnnuaireBundle\Entity\Localite $localite)
+    {
+        $this->localites[] = $localite;
+
+        return $this;
+    }
+
+    /**
+     * Remove localite
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Localite $localite
+     */
+    public function removeLocalite(\Annuaire\AnnuaireBundle\Entity\Localite $localite)
+    {
+        $this->localites->removeElement($localite);
+    }
+
+    /**
+     * Get localites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLocalites()
+    {
+        return $this->localites;
+    }
 }

@@ -21,6 +21,7 @@ class Stage
      */
     private $id;
     
+    
     /**
      * @var Prestataire
      *

@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+        <div class="main-inner">
+            <div class="content">
+                <div class="mt-150">
+                    <div class="hero-image">
+                        <div class="hero-image-inner" style='background-image: url("{{ asset('bundles/annuaireannuaire/img/tmp/slider-large-3.jpg') }}");'>
+                            
+                            <!--TEXT DANS LE HEADER DE MAIN-->
+                            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:for_hero-image-content.html.twig' %}
+                            
+                            <!--% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:search.html.twig' % FORMULAIRE DE RECHERCHE-->
+                            
+
+                            
+                        </div><!-- /.hero-image-inner -->
+                    </div><!-- /.hero-image -->
+                </div>
+
+                <div class="container">
+                    
+                    <!--UN TITRE ET DES GRANDES IMAGES AVEC DES ETOILES-->
+                    {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:titreETimagesEtoiles.html.twig' %}
+                    
+                    <!--UN TITRE ET DES GROS PAVES-->
+                    {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:titreETgrosPaves.html.twig' %}                    
+
+                    <!--COMMENTAIRES-->
+                    {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:expressions.html.twig' %}                
+
+                    <!--RECHERCHE-->
+                    {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:recherche.html.twig' %}
+                    
+                
+                    
+
+                    <!--DES PETITS PAVES% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:petitsPaves.html.twig' %-->                    
+
+                    <!--DES ANNONCES% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:annonces.html.twig' %-->                    
+
+                    <!--DES SIGNAUX AVEC DES LIENS% include 'AnnuaireAnnuaireBundle/Includes:BienEtre:picturesLinks.html.twig' %-->
+                    
+                    <!--TITRE AVEC DES PAVES-PRIX% include 'AnnuaireAnnuaireBundle/Includes:BienEtre:pavesPrix.html.twig' %-->
+                    
+                    <!--LISTE DES CATEGORIES% include 'AnnuaireAnnuaireBundle/BienEtre:Includes:categories.html.twig' %-->
+                    
+
+                    <!--CONTACT-->
+                    {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:contact.html.twig' %}
+
+
+                </div><!-- /.container -->
+
+            </div><!-- /.content -->
+        </div><!-- /.main-inner -->
+    </div>
+{% endblock %}

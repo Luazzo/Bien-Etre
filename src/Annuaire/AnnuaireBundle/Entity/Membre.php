@@ -1,9 +1,8 @@
 <?php
 
 namespace Annuaire\AnnuaireBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -12,8 +11,8 @@ class Membre extends User
 {
     
     public function __construct() {
-        $this->typeuser = "membre";       
-        $this->comments = new ArrayCollection();   
+        $this->typeuser = User::Type_MEMBRE;       
+        
         $this->notes = new ArrayCollection();    
         $this->favorites = new ArrayCollection();    
     }
@@ -24,11 +23,7 @@ class Membre extends User
      */
      private $favorites;
     
-    /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Annuaire\AnnuaireBundle\Entity\Comment", mappedBy="membre")
-     */
-     private $comments; 
+   
      
     /**
      * @var ArrayCollection
@@ -70,39 +65,6 @@ class Membre extends User
         return $this->newsletter;
     }
 
-    /**
-     * Add comment
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Comment $comment
-     *
-     * @return Membre
-     */
-    public function addComment(\Annuaire\AnnuaireBundle\Entity\Comment $comment)
-    {
-        $this->comments[] = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Comment $comment
-     */
-    public function removeComment(\Annuaire\AnnuaireBundle\Entity\Comment $comment)
-    {
-        $this->comments->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
 
     /**
      * Add note
@@ -172,109 +134,4 @@ class Membre extends User
         return $this->favorites;
     }
 
-    /**
-     * Set codepostId
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Codepost $codepostId
-     *
-     * @return Membre
-     */
-    public function setCodepostId(\Annuaire\AnnuaireBundle\Entity\Codepost $codepostId = null)
-    {
-        $this->codepost_id = $codepostId;
-
-        return $this;
-    }
-
-    /**
-     * Get codepostId
-     *
-     * @return \Annuaire\AnnuaireBundle\Entity\Codepost
-     */
-    public function getCodepostId()
-    {
-        return $this->codepost_id;
-    }
-
-    /**
-     * Set communeId
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Commune $communeId
-     *
-     * @return Membre
-     */
-    public function setCommuneId(\Annuaire\AnnuaireBundle\Entity\Commune $communeId = null)
-    {
-        $this->commune_id = $communeId;
-
-        return $this;
-    }
-
-    /**
-     * Get communeId
-     *
-     * @return \Annuaire\AnnuaireBundle\Entity\Commune
-     */
-    public function getCommuneId()
-    {
-        return $this->commune_id;
-    }
-
-    /**
-     * Set localiteId
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Localite $localiteId
-     *
-     * @return Membre
-     */
-    public function setLocaliteId(\Annuaire\AnnuaireBundle\Entity\Localite $localiteId = null)
-    {
-        $this->localite_id = $localiteId;
-
-        return $this;
-    }
-
-    /**
-     * Get localiteId
-     *
-     * @return \Annuaire\AnnuaireBundle\Entity\Localite
-     */
-    public function getLocaliteId()
-    {
-        return $this->localite_id;
-    }
-
-    /**
-     * Add category
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\User $category
-     *
-     * @return Membre
-     */
-    public function addCategory(\Annuaire\AnnuaireBundle\Entity\User $category)
-    {
-        $this->categories[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * Remove category
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\User $category
-     */
-    public function removeCategory(\Annuaire\AnnuaireBundle\Entity\User $category)
-    {
-        $this->categories->removeElement($category);
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
 }

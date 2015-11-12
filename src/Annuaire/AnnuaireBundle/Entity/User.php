@@ -17,9 +17,16 @@ use \Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
+    const Type_USER = 'user';
+    const Type_PRESTATAIRE = 'prestataire';
+    const Type_MEMBRE = 'membre';
+    
+    
     public function __construct() {
-        $this->dateInscr = new DateTime(); 
-        $this->categories = new ArrayCollection();       
+        $this->dateInscr = new DateTime();
+        $this->confInscr = false;  
+        $this->banni = false;
+        $this->nmbEssais = null;  
     }
         
     /**
@@ -30,29 +37,6 @@ class User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Codepost")
-     * @ORM\JoinColumn(name="codepostal_id", referencedColumnName="id")
-     */
-    protected $codepost_id;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Commune")
-     * @ORM\JoinColumn(name="commune_id", referencedColumnName="id")
-     */
-    protected $commune_id;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Localite")
-     * @ORM\JoinColumn(name="localite_id", referencedColumnName="id")
-     */
-    protected $localite_id;
-    
-    /**
-     * @ORM\ManyToMany(targetEntity="User", cascade={"persist"})
-     */
-    protected $categories;
 
     /**
      * @var string
@@ -84,7 +68,7 @@ class User
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="dateInscr", type="datetime")
+     * @ORM\Column(name="dateInscr", type="datetime", nullable=true)
      */
     protected $dateInscr;
 
@@ -97,44 +81,30 @@ class User
     /**
      * @var boolean
      *
-     * @ORM\Column(name="confInscr", type="boolean")
+     * @ORM\Column(name="confInscr", type="boolean", options={"default" : false})
      */
-    protected $confInscr;
+    protected $confInscr = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="banni", type="boolean")
+     * @ORM\Column(name="banni", type="boolean", options={"default" : false})
      */
-    protected $banni;
+    protected $banni = false;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="nmbEssais", type="integer")
+     * @ORM\Column(name="nmbEssais", type="integer", nullable=true)
      */
-    protected $nmbEssais;
+    protected $nmbEssais = null;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     protected $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="rue", type="string", length=255)
-     */
-    protected $rue;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="numero", type="string", length=255)
-     */
-    protected $numero;
         
 
     /**
@@ -387,157 +357,4 @@ class User
         return $this->email;
     }
 
-    /**
-     * Set rue
-     *
-     * @param string $rue
-     *
-     * @return User
-     */
-    public function setRue($rue)
-    {
-        $this->rue = $rue;
-
-        return $this;
-    }
-
-    /**
-     * Get rue
-     *
-     * @return string
-     */
-    public function getRue()
-    {
-        return $this->rue;
-    }
-
-    /**
-     * Set numero
-     *
-     * @param string $numero
-     *
-     * @return User
-     */
-    public function setNumero($numero)
-    {
-        $this->numero = $numero;
-
-        return $this;
-    }
-
-    /**
-     * Get numero
-     *
-     * @return string
-     */
-    public function getNumero()
-    {
-        return $this->numero;
-    }
-
-    /**
-     * Set codepostId
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Codepost $codepostId
-     *
-     * @return User
-     */
-    public function setCodepostId(\Annuaire\AnnuaireBundle\Entity\Codepost $codepostId = null)
-    {
-        $this->codepost_id = $codepostId;
-
-        return $this;
-    }
-
-    /**
-     * Get codepostId
-     *
-     * @return \Annuaire\AnnuaireBundle\Entity\Codepost
-     */
-    public function getCodepostId()
-    {
-        return $this->codepost_id;
-    }
-
-    /**
-     * Set communeId
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Commune $communeId
-     *
-     * @return User
-     */
-    public function setCommuneId(\Annuaire\AnnuaireBundle\Entity\Commune $communeId = null)
-    {
-        $this->commune_id = $communeId;
-
-        return $this;
-    }
-
-    /**
-     * Get communeId
-     *
-     * @return \Annuaire\AnnuaireBundle\Entity\Commune
-     */
-    public function getCommuneId()
-    {
-        return $this->commune_id;
-    }
-
-    /**
-     * Set localiteId
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Localite $localiteId
-     *
-     * @return User
-     */
-    public function setLocaliteId(\Annuaire\AnnuaireBundle\Entity\Localite $localiteId = null)
-    {
-        $this->localite_id = $localiteId;
-
-        return $this;
-    }
-
-    /**
-     * Get localiteId
-     *
-     * @return \Annuaire\AnnuaireBundle\Entity\Localite
-     */
-    public function getLocaliteId()
-    {
-        return $this->localite_id;
-    }
-
-    /**
-     * Add category
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\User $category
-     *
-     * @return User
-     */
-    public function addCategory(\Annuaire\AnnuaireBundle\Entity\User $category)
-    {
-        $this->categories[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * Remove category
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\User $category
-     */
-    public function removeCategory(\Annuaire\AnnuaireBundle\Entity\User $category)
-    {
-        $this->categories->removeElement($category);
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
 }

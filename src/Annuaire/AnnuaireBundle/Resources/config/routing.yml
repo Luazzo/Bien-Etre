@@ -1,3 +1,7 @@
 annuaire_annuaire_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: AnnuaireAnnuaireBundle:Default:index }
+    path:     /
+    defaults: { _controller: AnnuaireAnnuaireBundle:BienEtre:index }
+    
+inscription_form:
+    path:     /inscription
+    defaults: { _controller: AnnuaireAnnuaireBundle:User:inscription }

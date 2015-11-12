@@ -25,8 +25,18 @@ class Note
      * @var Membre
      *
      * @ORM\ManyToOne(targetEntity="Membre", inversedBy="notes")
+     * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
      */
     private $membre;
+    
+    
+    /**
+     * @var Prestataire
+     *
+     * @ORM\ManyToOne(targetEntity="Prestataire", inversedBy="notes")
+     * @ORM\JoinColumn(name="prestataire_id", referencedColumnName="id")
+     */
+    private $prestataire;
 
     /**
      * @var integer
@@ -123,5 +133,29 @@ class Note
     public function getMembre()
     {
         return $this->membre;
+    }
+
+    /**
+     * Set prestataire
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire
+     *
+     * @return Note
+     */
+    public function setPrestataire(\Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire = null)
+    {
+        $this->prestataire = $prestataire;
+
+        return $this;
+    }
+
+    /**
+     * Get prestataire
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Prestataire
+     */
+    public function getPrestataire()
+    {
+        return $this->prestataire;
     }
 }

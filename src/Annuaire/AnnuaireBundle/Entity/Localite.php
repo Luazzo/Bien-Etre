@@ -19,6 +19,22 @@ class Localite
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var Commune
+     *
+     * @ORM\ManyToOne(targetEntity="Commune", inversedBy="localites")
+     * @ORM\JoinColumn(name="commune", referencedColumnName="id")
+     */
+    private $commune;
+    
+    /**
+     * @var Codepost
+     *
+     * @ORM\ManyToOne(targetEntity="Codepost", inversedBy="localites")
+     * @ORM\JoinColumn(name="codepost", referencedColumnName="id")
+     */
+    private $codepost;
 
     /**
      * @var 
@@ -59,5 +75,53 @@ class Localite
     public function getLocalite()
     {
         return $this->localite;
+    }
+
+    /**
+     * Set commune
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Commune $commune
+     *
+     * @return Localite
+     */
+    public function setCommune(\Annuaire\AnnuaireBundle\Entity\Commune $commune = null)
+    {
+        $this->commune = $commune;
+
+        return $this;
+    }
+
+    /**
+     * Get commune
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Commune
+     */
+    public function getCommune()
+    {
+        return $this->commune;
+    }
+
+    /**
+     * Set codepost
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Codepost $codepost
+     *
+     * @return Localite
+     */
+    public function setCodepost(\Annuaire\AnnuaireBundle\Entity\Codepost $codepost = null)
+    {
+        $this->codepost = $codepost;
+
+        return $this;
+    }
+
+    /**
+     * Get codepost
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Codepost
+     */
+    public function getCodepost()
+    {
+        return $this->codepost;
     }
 }

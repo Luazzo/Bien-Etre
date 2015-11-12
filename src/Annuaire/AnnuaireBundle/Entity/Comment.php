@@ -24,10 +24,19 @@ class Comment
     /**
      * @var Membre
      *
-     * @ORM\ManyToOne(targetEntity="Membre", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Membre")
      * @ORM\JoinColumn(name="membre", referencedColumnName="id")
      */
     private $membre;
+    
+    
+    /**
+     * @var Prestataire
+     *
+     * @ORM\ManyToOne(targetEntity="Prestataire")
+     * @ORM\JoinColumn(name="prestataire", referencedColumnName="id")
+     */
+    private $prestataire;
     
 
     /**
@@ -156,5 +165,29 @@ class Comment
     public function getMembre()
     {
         return $this->membre;
+    }
+
+    /**
+     * Set prestataire
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire
+     *
+     * @return Comment
+     */
+    public function setPrestataire(\Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire = null)
+    {
+        $this->prestataire = $prestataire;
+
+        return $this;
+    }
+
+    /**
+     * Get prestataire
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Prestataire
+     */
+    public function getPrestataire()
+    {
+        return $this->prestataire;
     }
 }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Categorie
  *
  * @ORM\Table(name="categorie")
- * @ORM\Entity(repositoryClass="CategorieRepository")
+ * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\Entity\CategorieRepository")
  */
 class Categorie
 {
@@ -20,6 +20,12 @@ class Categorie
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+   /**
+    * @ORM\ManyToMany(targetEntity="Prestataire", cascade={"persist"})
+    */
+    private $prestataires;   
+    
 
     /**
      * @var string
@@ -48,6 +54,12 @@ class Categorie
      * @ORM\Column(name="valide", type="boolean")
      */
     private $valide;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"})     * 
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     */
+    private $image;
 
 
     /**
@@ -154,5 +166,70 @@ class Categorie
     public function getValide()
     {
         return $this->valide;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add prestataire
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire
+     *
+     * @return Categorie
+     */
+    public function addPrestataire(\Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire)
+    {
+        $this->prestataires[] = $prestataire;
+
+        return $this;
+    }
+
+    /**
+     * Remove prestataire
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire
+     */
+    public function removePrestataire(\Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire)
+    {
+        $this->prestataires->removeElement($prestataire);
+    }
+
+    /**
+     * Get prestataires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPrestataires()
+    {
+        return $this->prestataires;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Image $image
+     *
+     * @return Categorie
+     */
+    public function setImage(\Annuaire\AnnuaireBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

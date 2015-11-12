@@ -28,6 +28,14 @@ class Promo
      * @ORM\JoinColumn(name="prestataire", referencedColumnName="id")
      */
     private $prestataire;
+    
+    /**
+     * @var Categorie
+     *
+     * @ORM\ManyToOne(targetEntity="Categorie")
+     * @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
+     */
+    private $categorie;
 
     /**
      * @var string
@@ -279,5 +287,29 @@ class Promo
     public function getPrestataire()
     {
         return $this->prestataire;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $categorie
+     *
+     * @return Promo
+     */
+    public function setCategorie(\Annuaire\AnnuaireBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
     }
 }

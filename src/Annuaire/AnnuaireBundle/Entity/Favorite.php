@@ -29,6 +29,14 @@ class Favorite
      */
     private $membre_id;
     
+    /**
+     * @var Prestataire
+     *
+     * @ORM\ManyToOne(targetEntity="Prestataire", inversedBy="favorites")
+     * @ORM\JoinColumn(name="prestataire_id", referencedColumnName="id")
+     */
+    private $prestataire_id;
+    
 
     /**
      * @var \DateTime
@@ -94,5 +102,29 @@ class Favorite
     public function getMembreId()
     {
         return $this->membre_id;
+    }
+
+    /**
+     * Set prestataireId
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Prestataire $prestataireId
+     *
+     * @return Favorite
+     */
+    public function setPrestataireId(\Annuaire\AnnuaireBundle\Entity\Prestataire $prestataireId = null)
+    {
+        $this->prestataire_id = $prestataireId;
+
+        return $this;
+    }
+
+    /**
+     * Get prestataireId
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\Prestataire
+     */
+    public function getPrestataireId()
+    {
+        return $this->prestataire_id;
     }
 }
