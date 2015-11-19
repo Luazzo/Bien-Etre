@@ -12,6 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Image
 {
+    const TYPE_SLIDEHOME = 'slidehome';
+    const TYPE_SLIDEPREST = 'slideprest';
+    const TYPE_AVATAR = 'avatar';
+    const TYPE_LOGO = 'logo';
+    const TYPE_CATEGORIE = 'categorie';
+    const TYPE_LOGOCATEG = 'logocateg';
+    
+    
+    
     /**
      * @var integer
      *
@@ -20,41 +29,27 @@ class Image
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="images")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="path", type="string", length=255)
      */
-    private $nom;
-
+    private $path;
+    
     /**
      * @var integer
      *
-     * @ORM\Column(name="weight", type="integer")
+     * @ORM\Column(name="position", type="integer")
      */
-    private $weight;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="height", type="integer")
-     */
-    private $height;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="width", type="integer")
-     */
-    private $width;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="format", type="string", length=255)
-     */
-    private $format;
+    private $position;
 
     /**
      * @var string
@@ -69,6 +64,13 @@ class Image
      * @ORM\Column(name="visible", type="boolean")
      */
     private $visible;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255)
+     */
+    private $description;
 
 
     /**
@@ -82,123 +84,51 @@ class Image
     }
 
     /**
-     * Set nom
+     * Set path
      *
-     * @param string $nom
+     * @param string $path
      *
      * @return Image
      */
-    public function setNom($nom)
+    public function setPath($path)
     {
-        $this->nom = $nom;
+        $this->path = $path;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get path
      *
      * @return string
      */
-    public function getNom()
+    public function getPath()
     {
-        return $this->nom;
+        return $this->path;
     }
 
     /**
-     * Set weight
+     * Set position
      *
-     * @param integer $weight
+     * @param integer $position
      *
      * @return Image
      */
-    public function setWeight($weight)
+    public function setPosition($position)
     {
-        $this->weight = $weight;
+        $this->position = $position;
 
         return $this;
     }
 
     /**
-     * Get weight
+     * Get position
      *
      * @return integer
      */
-    public function getWeight()
+    public function getPosition()
     {
-        return $this->weight;
-    }
-
-    /**
-     * Set height
-     *
-     * @param integer $height
-     *
-     * @return Image
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    /**
-     * Get height
-     *
-     * @return integer
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * Set width
-     *
-     * @param integer $width
-     *
-     * @return Image
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    /**
-     * Get width
-     *
-     * @return integer
-     */
-    public function getWidth()
-    {
-        return $this->width;
-    }
-
-    /**
-     * Set format
-     *
-     * @param string $format
-     *
-     * @return Image
-     */
-    public function setFormat($format)
-    {
-        $this->format = $format;
-
-        return $this;
-    }
-
-    /**
-     * Get format
-     *
-     * @return string
-     */
-    public function getFormat()
-    {
-        return $this->format;
+        return $this->position;
     }
 
     /**
@@ -247,5 +177,53 @@ class Image
     public function getVisible()
     {
         return $this->visible;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Image
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\User $user
+     *
+     * @return Image
+     */
+    public function setUser(\Annuaire\AnnuaireBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Annuaire\AnnuaireBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

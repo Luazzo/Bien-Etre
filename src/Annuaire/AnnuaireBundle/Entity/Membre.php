@@ -11,7 +11,7 @@ class Membre extends User
 {
     
     public function __construct() {
-        $this->typeuser = User::Type_MEMBRE;       
+        $this->typeUser = User::Type_MEMBRE;       
         
         $this->notes = new ArrayCollection();    
         $this->favorites = new ArrayCollection();    

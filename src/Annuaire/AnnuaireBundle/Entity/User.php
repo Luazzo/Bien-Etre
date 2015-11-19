@@ -2,6 +2,7 @@
 
 namespace Annuaire\AnnuaireBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use \Doctrine\ORM\Mapping as ORM;
@@ -15,18 +16,21 @@ use \Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name="type_user", type="string")
  * @ORM\DiscriminatorMap({"admin" = "User", "membre" = "Membre", "prestataire" = "Prestataire"})
  */
-class User
+class User extends BaseUser
 {
-    const Type_USER = 'user';
+    const Type_USER = 'admin';
     const Type_PRESTATAIRE = 'prestataire';
     const Type_MEMBRE = 'membre';
     
     
     public function __construct() {
+        $this->typeUser = User::Type_USER;
         $this->dateInscr = new DateTime();
         $this->confInscr = false;  
         $this->banni = false;
         $this->nmbEssais = null;  
+        $this->images = new ArrayCollection();
+        parent::__constract();
     }
         
     /**
@@ -37,6 +41,12 @@ class User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Annuaire\AnnuaireBundle\Entity\Image", mappedBy="user_id")
+     */
+    private $images;
 
     /**
      * @var string
@@ -51,12 +61,6 @@ class User
      * @ORM\Column(name="prenom", type="string", length=255)
      */
     protected $prenom;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"})     * 
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
-     */
-    protected $avatar;
 
     /**
      * @var string
@@ -76,7 +80,7 @@ class User
      * @var string
      *
      */
-    protected $typeuser;
+    protected $typeUser;
 
     /**
      * @var boolean
@@ -166,30 +170,6 @@ class User
     }
 
     /**
-     * Set avatar
-     *
-     * @param string $avatar
-     *
-     * @return User
-     */
-    public function setAvatar($avatar)
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * Get avatar
-     *
-     * @return string
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-    /**
      * Set motPass
      *
      * @param string $motPass
@@ -216,7 +196,7 @@ class User
     /**
      * Set dateInscr
      *
-     * @param DateTime $dateInscr
+     * @param \DateTime $dateInscr
      *
      * @return User
      */
@@ -230,35 +210,11 @@ class User
     /**
      * Get dateInscr
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getDateInscr()
     {
         return $this->dateInscr;
-    }
-
-    /**
-     * Set typeuser
-     *
-     * @param string $typeuser
-     *
-     * @return User
-     */
-    public function setTypeuser($typeuser)
-    {
-        $this->typeuser = $typeuser;
-
-        return $this;
-    }
-
-    /**
-     * Get typeuser
-     *
-     * @return string
-     */
-    public function getTypeuser()
-    {
-        return $this->typeuser;
     }
 
     /**
@@ -356,5 +312,48 @@ class User
     {
         return $this->email;
     }
+
+    /**
+     * Add image
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Image $image
+     *
+     * @return User
+     */
+    public function addImage(\Annuaire\AnnuaireBundle\Entity\Image $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Image $image
+     */
+    public function removeImage(\Annuaire\AnnuaireBundle\Entity\Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+    
+    function getTypeuser() {
+        return $this->typeUser;
+    }
+
+    function setTypeuser($typeuser) {
+        $this->typeUser = $typeuser;
+    }
+
 
 }

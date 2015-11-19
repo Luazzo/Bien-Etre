@@ -10,18 +10,18 @@ use Doctrine\ORM\Mapping as ORM;
 class Prestataire extends User
 {
     public function __construct() {
-        $this->typeuser = User::Type_PRESTATAIRE;    
-        
+        $this->typeUser = User::Type_PRESTATAIRE;    
         $this->stages = new ArrayCollection();  
         $this->promos = new ArrayCollection();  
         $this->categories = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }
-   
-   /**
-    * @ORM\ManyToMany(targetEntity="Categorie", cascade={"persist"})
-    */
-    protected $categories;   
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Categorie", inversedBy="prestataires")
+     * @ORM\JoinTable(name="prestataires_categories")
+     */
+    protected $categories;
     
     /**
      * @var ArrayCollection
@@ -48,19 +48,19 @@ class Prestataire extends User
     private $promos;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Codepost")
-     * @ORM\JoinColumn(name="codepostal_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Codepost")
+     * @ORM\JoinColumn(name="codepost_id", referencedColumnName="id")
      */
     private $codepost_id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Commune")
+     * @ORM\OneToOne(targetEntity="Commune")
      * @ORM\JoinColumn(name="commune_id", referencedColumnName="id")
      */
     private $commune_id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Localite")
+     * @ORM\OneToOne(targetEntity="Localite")
      * @ORM\JoinColumn(name="localite_id", referencedColumnName="id")
      */
     private $localite_id;
@@ -362,11 +362,11 @@ class Prestataire extends User
     /**
      * Add categorie
      *
-     * @param \Annuaire\AnnuaireBundle\Entity\User $categorie
+     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $categorie
      *
      * @return Prestataire
      */
-    public function addCategorie(\Annuaire\AnnuaireBundle\Entity\User $categorie)
+    public function addCategorie(\Annuaire\AnnuaireBundle\Entity\Categorie $categorie)
     {
         $this->categories[] = $categorie;
 
@@ -376,9 +376,9 @@ class Prestataire extends User
     /**
      * Remove categorie
      *
-     * @param \Annuaire\AnnuaireBundle\Entity\User $categorie
+     * @param \Annuaire\AnnuaireBundle\Entity\Categories $categorie
      */
-    public function removeCategorie(\Annuaire\AnnuaireBundle\Entity\User $categorie)
+    public function removeCategorie(\Annuaire\AnnuaireBundle\Entity\Categorie $categorie)
     {
         $this->categories->removeElement($categorie);
     }

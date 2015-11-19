@@ -3,6 +3,7 @@
 namespace Annuaire\AnnuaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Annuaire\AnnuaireBundle\Entity\Prestataire;
 
 /**
  * Categorie
@@ -12,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Categorie
 {
+    
     /**
      * @var integer
      *
@@ -21,12 +23,16 @@ class Categorie
      */
     private $id;
     
-   /**
-    * @ORM\ManyToMany(targetEntity="Prestataire", cascade={"persist"})
-    */
-    private $prestataires;   
-    
+    /**
+     * @ORM\ManyToMany(targetEntity="Annuaire\AnnuaireBundle\Entity\Prestataire", mappedBy="categories")
+     * 
+     */
+    private $prestataires;
 
+    public function __construct() {
+        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * @var string
      *
@@ -166,13 +172,6 @@ class Categorie
     public function getValide()
     {
         return $this->valide;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
