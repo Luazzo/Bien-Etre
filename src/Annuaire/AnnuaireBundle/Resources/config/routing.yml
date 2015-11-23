@@ -1,4 +1,4 @@
-annuaire_annuaire_homepage:
+annuaire_homepage:
     path:     /
     defaults: { _controller: AnnuaireAnnuaireBundle:BienEtre:index }
     

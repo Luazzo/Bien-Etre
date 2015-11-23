@@ -5,7 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\PrestataireRepository")
  */
 class Prestataire extends User
 {
@@ -98,29 +98,52 @@ class Prestataire extends User
     private $tva;
 
 
-
     /**
-     * Set nomprest
+     * Set rue
      *
-     * @param string $nomprest
+     * @param string $rue
      *
      * @return Prestataire
      */
-    public function setNomprest($nomprest)
+    public function setRue($rue)
     {
-        $this->nomprest = $nomprest;
+        $this->rue = $rue;
 
         return $this;
     }
 
     /**
-     * Get nomprest
+     * Get rue
      *
      * @return string
      */
-    public function getNomprest()
+    public function getRue()
     {
-        return $this->nomprest;
+        return $this->rue;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param string $numero
+     *
+     * @return Prestataire
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return string
+     */
+    public function getNumero()
+    {
+        return $this->numero;
     }
 
     /**
@@ -145,30 +168,6 @@ class Prestataire extends User
     public function getSite()
     {
         return $this->site;
-    }
-
-    /**
-     * Set emailContact
-     *
-     * @param string $emailContact
-     *
-     * @return Prestataire
-     */
-    public function setEmailContact($emailContact)
-    {
-        $this->emailContact = $emailContact;
-
-        return $this;
-    }
-
-    /**
-     * Get emailContact
-     *
-     * @return string
-     */
-    public function getEmailContact()
-    {
-        return $this->emailContact;
     }
 
     /**
@@ -217,6 +216,108 @@ class Prestataire extends User
     public function getTva()
     {
         return $this->tva;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
+     *
+     * @return Prestataire
+     */
+    public function addCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
+     */
+    public function removeCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Add favorite
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Favorite $favorite
+     *
+     * @return Prestataire
+     */
+    public function addFavorite(\Annuaire\AnnuaireBundle\Entity\Favorite $favorite)
+    {
+        $this->favorites[] = $favorite;
+
+        return $this;
+    }
+
+    /**
+     * Remove favorite
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Favorite $favorite
+     */
+    public function removeFavorite(\Annuaire\AnnuaireBundle\Entity\Favorite $favorite)
+    {
+        $this->favorites->removeElement($favorite);
+    }
+
+    /**
+     * Get favorites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFavorites()
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * Add note
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Note $note
+     *
+     * @return Prestataire
+     */
+    public function addNote(\Annuaire\AnnuaireBundle\Entity\Note $note)
+    {
+        $this->notes[] = $note;
+
+        return $this;
+    }
+
+    /**
+     * Remove note
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Note $note
+     */
+    public function removeNote(\Annuaire\AnnuaireBundle\Entity\Note $note)
+    {
+        $this->notes->removeElement($note);
+    }
+
+    /**
+     * Get notes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 
     /**
@@ -357,203 +458,5 @@ class Prestataire extends User
     public function getLocaliteId()
     {
         return $this->localite_id;
-    }
-
-    /**
-     * Add categorie
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $categorie
-     *
-     * @return Prestataire
-     */
-    public function addCategorie(\Annuaire\AnnuaireBundle\Entity\Categorie $categorie)
-    {
-        $this->categories[] = $categorie;
-
-        return $this;
-    }
-
-    /**
-     * Remove categorie
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Categories $categorie
-     */
-    public function removeCategorie(\Annuaire\AnnuaireBundle\Entity\Categorie $categorie)
-    {
-        $this->categories->removeElement($categorie);
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * Set logo
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Image $logo
-     *
-     * @return Prestataire
-     */
-    public function setLogo(\Annuaire\AnnuaireBundle\Entity\Image $logo = null)
-    {
-        $this->logo = $logo;
-
-        return $this;
-    }
-
-    /**
-     * Get logo
-     *
-     * @return \Annuaire\AnnuaireBundle\Entity\Image
-     */
-    public function getLogo()
-    {
-        return $this->logo;
-    }
-
-    /**
-     * Add note
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Note $note
-     *
-     * @return Prestataire
-     */
-    public function addNote(\Annuaire\AnnuaireBundle\Entity\Note $note)
-    {
-        $this->notes[] = $note;
-
-        return $this;
-    }
-
-    /**
-     * Remove note
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Note $note
-     */
-    public function removeNote(\Annuaire\AnnuaireBundle\Entity\Note $note)
-    {
-        $this->notes->removeElement($note);
-    }
-
-    /**
-     * Get notes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getNotes()
-    {
-        return $this->notes;
-    }
-
-    /**
-     * Add favorite
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Favorite $favorite
-     *
-     * @return Prestataire
-     */
-    public function addFavorite(\Annuaire\AnnuaireBundle\Entity\Favorite $favorite)
-    {
-        $this->favorites[] = $favorite;
-
-        return $this;
-    }
-
-    /**
-     * Remove favorite
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Favorite $favorite
-     */
-    public function removeFavorite(\Annuaire\AnnuaireBundle\Entity\Favorite $favorite)
-    {
-        $this->favorites->removeElement($favorite);
-    }
-
-    /**
-     * Get favorites
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFavorites()
-    {
-        return $this->favorites;
-    }
-
-    /**
-     * Add category
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
-     *
-     * @return Prestataire
-     */
-    public function addCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
-    {
-        $this->categories[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * Remove category
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
-     */
-    public function removeCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
-    {
-        $this->categories->removeElement($category);
-    }
-
-    /**
-     * Set rue
-     *
-     * @param string $rue
-     *
-     * @return Prestataire
-     */
-    public function setRue($rue)
-    {
-        $this->rue = $rue;
-
-        return $this;
-    }
-
-    /**
-     * Get rue
-     *
-     * @return string
-     */
-    public function getRue()
-    {
-        return $this->rue;
-    }
-
-    /**
-     * Set numero
-     *
-     * @param string $numero
-     *
-     * @return Prestataire
-     */
-    public function setNumero($numero)
-    {
-        $this->numero = $numero;
-
-        return $this;
-    }
-
-    /**
-     * Get numero
-     *
-     * @return string
-     */
-    public function getNumero()
-    {
-        return $this->numero;
     }
 }

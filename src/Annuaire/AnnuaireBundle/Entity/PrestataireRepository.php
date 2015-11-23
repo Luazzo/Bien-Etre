@@ -10,4 +10,15 @@ namespace Annuaire\AnnuaireBundle\Entity;
  */
 class PrestataireRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getDerniers($nmb){
+        $qb = $this->createQueryBuilder('prest');
+        $qb->orderBy('prest.id', 'DESC');
+        $qb->setMaxResults($nmb);
+        $query = $qb->getQuery();
+
+        // On récupère les résultats à partir de la Query
+        $resultats = $query->getResult();
+        
+        return $resultats;
+    }
 }
