@@ -10,4 +10,5 @@ namespace Annuaire\AnnuaireBundle\Entity;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    
 }

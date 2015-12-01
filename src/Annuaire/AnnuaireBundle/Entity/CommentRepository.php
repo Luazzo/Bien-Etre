@@ -10,4 +10,15 @@ namespace Annuaire\AnnuaireBundle\Entity;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getDerniersComments($nmb)
+    {
+        return $this->createQueryBuilder('c')
+                    ->leftJoin('c.membre', 'm')->addSelect('m')
+                    ->leftJoin('m.images', 'i')->where("i.type = 'avatar'")->addSelect('i')
+                    ->leftJoin('c.prestataire', 'p')->addSelect('p')
+                    ->orderBy('c.id', 'DESC')
+                    ->setMaxResults($nmb)
+                    ->getQuery()
+                    ->getResult() ;
+    }
 }

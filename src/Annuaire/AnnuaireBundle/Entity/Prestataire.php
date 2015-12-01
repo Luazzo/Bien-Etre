@@ -5,7 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\PrestataireRepository")
+ * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\Entity\PrestataireRepository")
  */
 class Prestataire extends User
 {
@@ -15,6 +15,7 @@ class Prestataire extends User
         $this->promos = new ArrayCollection();  
         $this->categories = new ArrayCollection();
         $this->favorites = new ArrayCollection();
+        parent::__construct();
     }
     
     /**
@@ -37,13 +38,13 @@ class Prestataire extends User
     
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Annuaire\AnnuaireBundle\Entity\Stage", mappedBy="prest_id")
+     * @ORM\OneToMany(targetEntity="Annuaire\AnnuaireBundle\Entity\Stage", mappedBy="prestataire")
      */
     private $stages;
     
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Annuaire\AnnuaireBundle\Entity\Promo", mappedBy="prest_id")
+     * @ORM\OneToMany(targetEntity="Annuaire\AnnuaireBundle\Entity\Promo", mappedBy="prestataire")
      */
     private $promos;
     
@@ -64,6 +65,13 @@ class Prestataire extends User
      * @ORM\JoinColumn(name="localite_id", referencedColumnName="id")
      */
     private $localite_id;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_prest", type="string", length=255, nullable=true)
+     */
+    private $nomprest;
     
     /**
      * @var string
@@ -218,39 +226,6 @@ class Prestataire extends User
         return $this->tva;
     }
 
-    /**
-     * Add category
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
-     *
-     * @return Prestataire
-     */
-    public function addCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
-    {
-        $this->categories[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * Remove category
-     *
-     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
-     */
-    public function removeCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
-    {
-        $this->categories->removeElement($category);
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
 
     /**
      * Add favorite
@@ -458,5 +433,63 @@ class Prestataire extends User
     public function getLocaliteId()
     {
         return $this->localite_id;
+    }
+
+    /**
+     * Set nomprest
+     *
+     * @param string $nomprest
+     *
+     * @return Prestataire
+     */
+    public function setNomprest($nomprest)
+    {
+        $this->nomprest = $nomprest;
+
+        return $this;
+    }
+
+    /**
+     * Get nomprest
+     *
+     * @return string
+     */
+    public function getNomprest()
+    {
+        return $this->nomprest;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
+     *
+     * @return Prestataire
+     */
+    public function addCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
+     */
+    public function removeCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

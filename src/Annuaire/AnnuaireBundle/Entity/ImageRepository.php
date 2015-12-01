@@ -10,4 +10,6 @@ namespace Annuaire\AnnuaireBundle\Entity;
  */
 class ImageRepository extends \Doctrine\ORM\EntityRepository
 {
+    
+    
 }

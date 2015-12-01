@@ -27,7 +27,7 @@
                     <div class="container">
                         <div class="header-inner">
                             <div class="header-logo">
-                                <a href="{{path('annuaire_annuaire_homepage')}}">
+                                <a href="{{path('annuaire_homepage')}}">
                                     <img src="{{ asset('bundles/annuaireannuaire/img/logo-white.png') }}" alt="Logo">
                                     <span>Bien-Etre</span>
                                 </a>
@@ -166,7 +166,9 @@
                 </div><!-- /.header-wrapper -->
             </header><!-- /.header -->
             
-            {% block body %}{% endblock %}
+                {% block body %}
+                    <!-- Contenu -->
+                {% endblock %}
         
             <footer class="footer">
                 <div class="footer-top">

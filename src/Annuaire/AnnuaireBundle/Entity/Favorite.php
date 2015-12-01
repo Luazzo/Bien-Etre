@@ -27,7 +27,7 @@ class Favorite
      * @ORM\ManyToOne(targetEntity="Membre", inversedBy="favorites")
      * @ORM\JoinColumn(name="membre_id", referencedColumnName="id")
      */
-    private $membre_id;
+    private $membre;
     
     /**
      * @var Prestataire
@@ -35,8 +35,8 @@ class Favorite
      * @ORM\ManyToOne(targetEntity="Prestataire", inversedBy="favorites")
      * @ORM\JoinColumn(name="prestataire_id", referencedColumnName="id")
      */
-    private $prestataire_id;
     
+    private $prestataire;
 
     /**
      * @var \DateTime
@@ -81,50 +81,50 @@ class Favorite
     }
 
     /**
-     * Set membreId
+     * Set membre
      *
-     * @param \Annuaire\AnnuaireBundle\Entity\Membre $membreId
+     * @param \Annuaire\AnnuaireBundle\Entity\Membre $membre
      *
      * @return Favorite
      */
-    public function setMembreId(\Annuaire\AnnuaireBundle\Entity\Membre $membreId = null)
+    public function setMembre(\Annuaire\AnnuaireBundle\Entity\Membre $membre = null)
     {
-        $this->membre_id = $membreId;
+        $this->membre = $membre;
 
         return $this;
     }
 
     /**
-     * Get membreId
+     * Get membre
      *
      * @return \Annuaire\AnnuaireBundle\Entity\Membre
      */
-    public function getMembreId()
+    public function getMembre()
     {
-        return $this->membre_id;
+        return $this->membre;
     }
 
     /**
-     * Set prestataireId
+     * Set prestataire
      *
-     * @param \Annuaire\AnnuaireBundle\Entity\Prestataire $prestataireId
+     * @param \Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire
      *
      * @return Favorite
      */
-    public function setPrestataireId(\Annuaire\AnnuaireBundle\Entity\Prestataire $prestataireId = null)
+    public function setPrestataire(\Annuaire\AnnuaireBundle\Entity\Prestataire $prestataire = null)
     {
-        $this->prestataire_id = $prestataireId;
+        $this->prestataire = $prestataire;
 
         return $this;
     }
 
     /**
-     * Get prestataireId
+     * Get prestataire
      *
      * @return \Annuaire\AnnuaireBundle\Entity\Prestataire
      */
-    public function getPrestataireId()
+    public function getPrestataire()
     {
-        return $this->prestataire_id;
+        return $this->prestataire;
     }
 }

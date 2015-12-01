@@ -5,3 +5,12 @@ annuaire_homepage:
 inscription_form:
     path:     /inscription
     defaults: { _controller: AnnuaireAnnuaireBundle:User:inscription }
+    
+prestataire_profil:
+    path:     /prestataire-profil/{id}
+    defaults: { _controller: AnnuaireAnnuaireBundle:User:showProfil }
+    
+categorie_show:
+    path:     /categorie/{id}
+    defaults: { _controller: AnnuaireAnnuaireBundle:BienEtre:showCateg }
+    

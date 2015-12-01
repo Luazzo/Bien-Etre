@@ -17,13 +17,23 @@ class BienEtreController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $categories = $em->getRepository('AnnuaireAnnuaireBundle:Categorie')->findAll();
+        $categories = $em->getRepository('AnnuaireAnnuaireBundle:Categorie')->findAllavecImg(8);
         $lastPrests = $em->getRepository('AnnuaireAnnuaireBundle:Prestataire')->getDerniers(4);
+        $lastComments = $em->getRepository('AnnuaireAnnuaireBundle:Comment')->getDerniersComments(5);
         
-        return $this->render('AnnuaireAnnuaireBundle:BienEtre:index.html.twig', array(
-            'test'=>"teeest",
-            'categories' => $categories,
-            'lastPrests' => $lastPrests
-        ));
+        return $this->render('AnnuaireAnnuaireBundle:BienEtre:index.html.twig', 
+            array(
+                'categories' => $categories,
+                'lastPrests' => $lastPrests,
+                'lastComments' => $lastComments
+            )
+        );
+    }
+    
+    public function showCateg($id)
+    {
+       
+        
+        return $this->render('AnnuaireAnnuaireBundle:BienEtre:index.html.twig');
     }
 }

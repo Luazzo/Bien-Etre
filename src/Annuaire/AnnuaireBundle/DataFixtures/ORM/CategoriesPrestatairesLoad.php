@@ -11,7 +11,7 @@ class PrestatairesCategories extends AbstractFixture implements OrderedFixtureIn
             for($i=1; $i<6; $i++){
                 $prest = $this->getReference('prest-'.$i);
                 $cat = $this->getReference('cat-'.\rand(1,5));
-                $prest->addCategorie($cat);
+                $prest->addCategory($cat);
                 $cat->addPrestataire($prest);
                 $manager->persist($cat);
                 $manager->persist($prest);

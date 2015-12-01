@@ -13,7 +13,7 @@ class Comments extends AbstractFixture implements OrderedFixtureInterface{
         $tab_comments = array(
             array(
                 "date" => new \DateTime(),
-                "contenu" => "Comment 1 du prestataire 1",
+                "contenu" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis luctus ex, id aliquet justo. Pellentesque a felis sit amet mauris sodales tincidunt. Nullam facilisis sapien a neque tincidunt, nec pulvinar neque scelerisque. In feugiat euismod risus quis pharetra. Duis et justo a eros faucibus condimentum. ",
                 "titre" => "PROMO - 1",
                 "membre" => $this->getReference('membre-1'),
                 "prestataire" => $this->getReference('prest-1'),
@@ -21,7 +21,7 @@ class Comments extends AbstractFixture implements OrderedFixtureInterface{
             ),
             array(
                 "date" => new \DateTime(),
-                "contenu" => "Comment 2 du prestataire 2",
+                "contenu" => "Suspendisse quis purus condimentum, varius magna ac, bibendum odio. Donec in ultricies mi, nec pulvinar mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. ",
                 "titre" => "PROMO - 2",
                 "membre" => $this->getReference('membre-1'),
                 "prestataire" => $this->getReference('prest-2'),
@@ -29,7 +29,7 @@ class Comments extends AbstractFixture implements OrderedFixtureInterface{
             ),
             array(
                 "date" => new \DateTime(),
-                "contenu" => "Comment 3 du prestataire 3",
+                "contenu" => "Nullam et malesuada turpis, dapibus rutrum velit. Vivamus viverra velit porta odio mattis placerat. Sed imperdiet massa sed iaculis dapibus. Cras et est id massa semper varius eu a massa. Sed quis tristique ipsum. Praesent blandit laoreet sapien. In in est quis est eleifend volutpat vitae in neque. Vestibulum elit dolor, congue in tempus nec, imperdiet sed ligula.",
                 "titre" => "PROMO - 3",
                 "membre" => $this->getReference('membre-1'),
                 "prestataire" => $this->getReference('prest-3'),
@@ -37,7 +37,7 @@ class Comments extends AbstractFixture implements OrderedFixtureInterface{
             ),
             array(
                 "date" => new \DateTime(),
-                "contenu" => "Comment 4 du prestataire 4",
+                "contenu" => "Nunc malesuada nisl non metus placerat pellentesque. Vivamus et semper risus, in eleifend est. Fusce elementum finibus neque, non egestas felis gravida et. In eget fringilla lacus. Aliquam pharetra finibus sollicitudin. Suspendisse vulputate dui sapien, non ornare purus elementum a. ",
                 "titre" => "PROMO - 4",
                 "membre" => $this->getReference('membre-1'),
                 "prestataire" => $this->getReference('prest-4'),
@@ -45,7 +45,7 @@ class Comments extends AbstractFixture implements OrderedFixtureInterface{
             ),
             array(
                 "date" => new \DateTime(),
-                "contenu" => "Comment 5 du prestataire 5",
+                "contenu" => "Vivamus porta, justo sit amet hendrerit varius, neque turpis luctus est, non placerat velit lacus ut lorem. Sed tempor odio id mauris laoreet, sit amet viverra risus viverra. Integer faucibus imperdiet dui. Duis aliquet sagittis ex et porta. Duis ac est et eros dapibus dictum. In dui magna, faucibus ut ipsum in, iaculis consequat augue. Nunc at velit eu velit pulvinar aliquam eget eget sem.",
                 "titre" => "PROMO - 5",
                 "membre" => $this->getReference('membre-1'),
                 "prestataire" => $this->getReference('prest-5'),

@@ -4,6 +4,7 @@ namespace Annuaire\AnnuaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Annuaire\AnnuaireBundle\Entity\Prestataire;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Categorie
@@ -39,6 +40,12 @@ class Categorie
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
+    
+    /**
+     * @Gedmo\Slug(fields={"nom"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
 
     /**
      * @var string

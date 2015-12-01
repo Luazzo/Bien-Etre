@@ -24,13 +24,13 @@ class User extends BaseUser
     
     
     public function __construct() {
+        parent::__construct();
         $this->typeUser = User::Type_USER;
         $this->dateInscr = new DateTime();
         $this->confInscr = false;  
         $this->banni = false;
         $this->nmbEssais = null;  
         $this->images = new ArrayCollection();
-        parent::__constract();
     }
         
     /**
@@ -44,7 +44,7 @@ class User extends BaseUser
     
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Annuaire\AnnuaireBundle\Entity\Image", mappedBy="user_id")
+     * @ORM\OneToMany(targetEntity="Annuaire\AnnuaireBundle\Entity\Image", mappedBy="user")
      */
     private $images;
 
@@ -61,13 +61,6 @@ class User extends BaseUser
      * @ORM\Column(name="prenom", type="string", length=255)
      */
     protected $prenom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="motPass", type="string", length=255)
-     */
-    protected $motPass;
 
     /**
      * @var DateTime
@@ -159,30 +152,6 @@ class User extends BaseUser
     public function getPrenom()
     {
         return $this->prenom;
-    }
-
-    /**
-     * Set motPass
-     *
-     * @param string $motPass
-     *
-     * @return User
-     */
-    public function setMotPass($motPass)
-    {
-        $this->motPass = $motPass;
-
-        return $this;
-    }
-
-    /**
-     * Get motPass
-     *
-     * @return string
-     */
-    public function getMotPass()
-    {
-        return $this->motPass;
     }
 
     /**

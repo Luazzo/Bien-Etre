@@ -10,4 +10,13 @@ namespace Annuaire\AnnuaireBundle\Entity;
  */
 class CategorieRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllavecImg($nmb)
+    {
+        return $this->createQueryBuilder('c')
+                    ->leftJoin('c.image', 'i')->addSelect('i')
+                    ->orderBy('c.id', 'DESC')
+                    ->setMaxResults($nmb)
+                    ->getQuery()
+                    ->getResult() ;
+    }
 }

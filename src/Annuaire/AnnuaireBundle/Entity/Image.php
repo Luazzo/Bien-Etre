@@ -31,7 +31,6 @@ class Image
     private $id;
     
     /**
-     * @var User
      * @ORM\ManyToOne(targetEntity="User", inversedBy="images")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */

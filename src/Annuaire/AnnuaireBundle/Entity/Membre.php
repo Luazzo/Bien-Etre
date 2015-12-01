@@ -15,6 +15,7 @@ class Membre extends User
         
         $this->notes = new ArrayCollection();    
         $this->favorites = new ArrayCollection();    
+        parent::__construct();
     }
     
     /**

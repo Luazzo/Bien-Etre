@@ -5,20 +5,21 @@
     </div><!-- /.page-header -->
 
     <div class="cards-wrapper">
-        <div class="row">
+        {% if lastPrests %}
+            <div class="row">
             <div class="col-sm-8">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="card" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/product-7.jpg')}}">
+                        <div class="card" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/prestataire-1.jpg')}}">
                             <div class="card-label">
-                                <a href="listing-detail.html">Coffe</a>
+                                <a href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}">{{ lastPrests[0].site }}</a>
                             </div><!-- /.card-label -->
 
                             <div class="card-content">
-                                <h2><a href="listing-detail.html">Brazilian Coffe Taste</a></h2>
+                                <h2><a href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}">{{ lastPrests[0].nomprest }}</a></h2>
 
                                 <div class="card-meta">
-                                    <i class="fa fa-map-o"></i> 347/26 22th Avenue, NYC USA
+                                    <i class="fa fa-map-o"></i> {{ lastPrests[0].getCodepostId.code }}  {{ lastPrests[0].getLocaliteId.localite }}
                                 </div><!-- /.card-meta -->
 
                                 <div class="card-rating">
@@ -42,16 +43,16 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="card" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/product-4.jpg')}}">
+                        <div class="card" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/prestataire-2.jpg')}}">
                             <div class="card-label">
-                                <a href="listing-detail.html">Restaurant</a>
+                                <a href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}">{{ lastPrests[0].site }}</a>
                             </div><!-- /.card-label -->
 
                             <div class="card-content">
-                                <h2><a href="listing-detail.html">Coffee &amp; Newspaper</a></h2>
+                                <h2><a href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}">{{ lastPrests[0].nomprest }}</a></h2>
 
                                 <div class="card-meta">
-                                    <i class="fa fa-map-o"></i> 347/26 22th Avenue, NYC USA
+                                    <i class="fa fa-map-o"></i> {{ lastPrests[1].getCodepostId.code }}     {{ lastPrests[1].getLocaliteId.localite }}
                                 </div><!-- /.card-meta -->
 
                                 <div class="card-rating">
@@ -67,21 +68,22 @@
                                     <a class="fa fa-search" href="listing-detail.html"></a>
                                     <a class="fa fa-heart-o" href="#"></a>
                                 </div>
+
                             </div><!-- /.card-content -->
                         </div><!-- /.card -->
                     </div>
 
                     <div class="col-sm-6">
-                        <div class="card" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/product-2.jpg')}}">
+                        <div class="card" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/prestataire-3.png')}}">
                             <div class="card-label">
-                                <a href="listing-detail.html">Vacation</a>
+                                <a href="{{ path('prestataire_profil', { 'id' : lastPrests[2].id }) }}">{{ lastPrests[2].site }}</a>
                             </div><!-- /.card-label -->
 
                             <div class="card-content">
-                                <h2><a href="listing-detail.html">Homemade Coffee</a></h2>
+                                <h2><a href="{{ path('prestataire_profil', { 'id' : lastPrests[2].id }) }}">{{ lastPrests[2].nomprest }}</a></h2>
 
                                 <div class="card-meta">
-                                    <i class="fa fa-map-o"></i> 347/26 22th Avenue, NYC USA
+                                    <i class="fa fa-map-o"></i> {{ lastPrests[2].getCodepostId.code }}    {{ lastPrests[2].getLocaliteId.localite }}
                                 </div><!-- /.card-meta -->
 
                                 <div class="card-rating">
@@ -93,10 +95,11 @@
                                 </div><!-- /.card-rating -->
 
                                 <div class="card-actions">
-                                    <a class="fa fa-bookmark-o marked" href="#"></a>
+                                    <a class="fa fa-bookmark-o" href="#"></a>
                                     <a class="fa fa-search" href="listing-detail.html"></a>
                                     <a class="fa fa-heart-o" href="#"></a>
                                 </div>
+
                             </div><!-- /.card-content -->
                         </div><!-- /.card -->
                     </div><!-- /.col-* -->
@@ -104,16 +107,16 @@
             </div><!-- /.col-* -->
 
             <div class="col-sm-4">
-                <div class="card card-tall" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/product-1.jpg')}}">
+                <div class="card card-tall" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/prestataire-4.jpg')}}">
                     <div class="card-label">
-                        <a href="listing-detail.html">Vacation</a>
+                        <a href="{{ path('prestataire_profil', { 'id' : lastPrests[3].id }) }}">{{ lastPrests[3].site }}</a>
                     </div><!-- /.card-label -->
 
                     <div class="card-content">
-                        <h2><a href="listing-detail.html">Trip to Paris, France</a></h2>
+                        <h2><a href="{{ path('prestataire_profil', { 'id' : lastPrests[3].id }) }}">{{ lastPrests[3].nomprest }}</a></h2>
 
                         <div class="card-meta">
-                            <i class="fa fa-map-o"></i> 347/26 22th Avenue, NYC USA
+                            <i class="fa fa-map-o"></i>{{ lastPrests[3].getCodepostId.code }}     {{ lastPrests[3].getLocaliteId.localite }}
                         </div><!-- /.card-meta -->
 
                         <div class="card-rating">
@@ -127,12 +130,17 @@
                         <div class="card-actions">
                             <a class="fa fa-bookmark-o" href="#"></a>
                             <a class="fa fa-search" href="listing-detail.html"></a>
-                            <a class="fa fa-heart-o marked" href="#"></a>
+                            <a class="fa fa-heart-o" href="#"></a>
                         </div>
+
                     </div><!-- /.card-content -->
                 </div><!-- /.card -->
             </div><!-- /.col-* -->
         </div><!-- /.row -->
+        {% else %}
+            pas de Prestataires enregistrés
+        {% endif %}
+        
     </div><!-- /.cards-wrapper -->
 
 </div>
