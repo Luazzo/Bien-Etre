@@ -3,6 +3,7 @@
 namespace Annuaire\AnnuaireBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr;
 
 /**
  * PrestataireRepository
@@ -34,5 +35,22 @@ class PrestataireRepository extends EntityRepository
                     ->setParameter('id', $id)
                     ->getQuery()
                     ->getResult() ;
+    }
+    
+    public function findPrest($prest,$loc, $cat)
+    {
+        $qb = $this->createQueryBuilder('p');
+        
+        $qb = $qb->where($qb->expr()->like('p.nomprest', $qb->expr()->literal('%'.$prest.'%')))
+                
+                    ->andWhere('p.localite_id = :loc')
+                    ->leftJoin('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i') //->where("i.type = 'logo'")
+                    ->leftJoin('p.categories', 'cat')->addSelect('cat')//->where("cat.id = :cat")
+                    ->setParameter('loc', $loc)
+                    //->setParameter('cat', $cat)
+                    ->orderBy('p.nomprest')
+                    ->getQuery()
+                    ->getResult() ;
+        
     }
 }   

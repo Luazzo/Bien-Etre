@@ -3,12 +3,14 @@
 namespace Annuaire\AnnuaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 //
 /**
  * Image
  *
  * @ORM\Table(name="images")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\Entity\ImageRepository")
  */
 class Image
 {

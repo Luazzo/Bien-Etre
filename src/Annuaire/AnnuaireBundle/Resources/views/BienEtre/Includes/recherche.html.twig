@@ -1,36 +1,39 @@
 <div class="user-inscription">
+    
     <div class="container">
         <div class="row">
-            <div class="col-sm-1 col-sm-offset-8 col-lg-8 col-lg-offset-2">
-                <form action="?" method="get">
+            <div class="">
+                <form action="{{ path('search') }}" method="get">
                     <h2>Start Searching</h2>
 
                     <div class="hero-image-keyword form-group">
-                        <input class="form-control" type="text" placeholder="Keyword">
+                        <input  name="prestataire" class="form-control" type="text" placeholder="Nom d'institut">
                     </div><!-- /.form-group -->
 
                     <div class="hero-image-location form-group">
-                        <select title="Location" class="form-control">
-                            <option>Bronx</option>
-                            <option>Brooklyn</option>
-                            <option>Manhattan</option>
-                            <option>Staten Island</option>
-                            <option>Queens</option>
+                        <select name="localite" title="Location" class="form-control">
+                            {% if localites %}
+                                {% for l in localites %}
+                                    <option value="{{l.id}}">{{l.localite}}</option>
+                                {% endfor %}
+                            {% endif %}
                         </select>
+                        
                     </div><!-- /.form-group -->
 
                     <div class="hero-image-category form-group">
-                        <select title="Category" class="form-control">
-                            <option value="">Automotive</option>
-                            <option value="">Jobs</option>
-                            <option value="">Nightlife</option>
-                            <option value="">Services</option>
+                        <select  name="categorie" title="Category" class="form-control">
+                            {% if categs %}
+                                {% for c in categs %}
+                                    <option value="{{c.id}}">{{c.nom}}</option>
+                                {% endfor %}
+                            {% endif %}
                         </select>
                     </div><!-- /.form-group -->
 
-                    <div class="hero-image-price form-group">
-                        <input class="form-control" type="text" placeholder="Min. Price">
-                    </div><!-- /.form-group -->
+                    <!--<div class="hero-image-price form-group">
+                        <input  name="prix" class="form-control" type="text" placeholder="Prix maximal">
+                    </div> /.form-group -->
 
                     <button class="btn btn-primary btn-block" type="submit">Search</button>
                 </form>

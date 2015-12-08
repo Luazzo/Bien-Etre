@@ -12,4 +12,11 @@ class ImageRepository extends \Doctrine\ORM\EntityRepository
 {
     
     
+    public function getSliderImages(){
+        return $this->createQueryBuilder('i')
+                    ->where("i.type = 'slidehome'")
+                    ->orderBy('i.position', 'ASC')
+                    ->getQuery()
+                    ->getResult() ;
+    }
 }

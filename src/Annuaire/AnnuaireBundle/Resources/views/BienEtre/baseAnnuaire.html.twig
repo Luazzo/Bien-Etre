@@ -1,21 +1,13 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <div class="main">
-        <div class="main-inner">
             <div class="content">
                 <div class="mt-150">
-                    <div class="hero-image">
-                        <div class="hero-image-inner" style='background-image: url("{{ asset('bundles/annuaireannuaire/img/tmp/slider-large-3.jpg') }}");'>
-                            
-                            <!--TEXT DANS LE HEADER DE MAIN-->
-                            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:for_hero-image-content.html.twig' %}
-                            
-                            <!--% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:search.html.twig' % FORMULAIRE DE RECHERCHE-->
-                            
-
-                            
-                        </div><!-- /.hero-image-inner -->
+                    <div class="hero-image">                        
+                     
+                        <!--SLIDER-->
+                        {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:sliderAnnuaire.html.twig' %}     
+                        
                     </div><!-- /.hero-image -->
                 </div>
                 
@@ -26,6 +18,4 @@
                 </div><!-- /.container -->     
 
             </div><!-- /.content -->
-        </div><!-- /.main-inner -->
-    </div>
 {% endblock %}

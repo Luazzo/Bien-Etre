@@ -19,4 +19,12 @@ class CategorieRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult() ;
     }
+    
+    
+    public function getCategories(){
+        return $this->createQueryBuilder('ct')
+                    ->orderBy('ct.nom', 'ASC')
+                    ->getQuery()
+                    ->getResult() ;
+    }
 }

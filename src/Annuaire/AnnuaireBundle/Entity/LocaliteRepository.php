@@ -10,4 +10,10 @@ namespace Annuaire\AnnuaireBundle\Entity;
  */
 class LocaliteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getLocalites(){
+        return $this->createQueryBuilder('l')
+                    ->orderBy('l.localite', 'ASC')
+                    ->getQuery()
+                    ->getResult() ;
+    }
 }
