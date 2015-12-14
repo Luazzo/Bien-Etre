@@ -16,4 +16,9 @@ class LocaliteRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult() ;
     }
+    
+    
+    
+    
+    
 }

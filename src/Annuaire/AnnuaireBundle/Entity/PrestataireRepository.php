@@ -34,23 +34,109 @@ class PrestataireRepository extends EntityRepository
                     ->leftJoin('p.images', 'i')->where("i.type = 'logo'")->andWhere("i.user = :id")->addSelect('i')
                     ->setParameter('id', $id)
                     ->getQuery()
-                    ->getResult() ;
+                    ->getResult();
     }
     
-    public function findPrest($prest,$loc, $cat)
+    public function findPrestUni($prest,$loc, $cat)
     {
         $qb = $this->createQueryBuilder('p');
         
-        $qb = $qb->where($qb->expr()->like('p.nomprest', $qb->expr()->literal('%'.$prest.'%')))
-                
-                    ->andWhere('p.localite_id = :loc')
-                    ->leftJoin('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i') //->where("i.type = 'logo'")
-                    ->leftJoin('p.categories', 'cat')->addSelect('cat')//->where("cat.id = :cat")
-                    ->setParameter('loc', $loc)
-                    //->setParameter('cat', $cat)
-                    ->orderBy('p.nomprest')
-                    ->getQuery()
-                    ->getResult() ;
-        
+        if($prest != null){
+            $qb = $qb->where($qb->expr()->like('p.nomprest', $qb->expr()->literal('%'.$prest.'%')));      
+            if($loc != null){
+                $qb = $qb->andWhere('p.localite_id = :loc')->setParameter('loc', $loc);
+            }
+        }else{
+            if($loc != null){
+                $qb = $qb->where('p.localite_id = :loc')->setParameter('loc', $loc);
+            }
+        }        
+                if($cat != null){
+                    $qb = $qb->leftJoin('p.categories', 'c')->addSelect('c')->where('c.id = :cat')->setParameter('cat', $cat);
+                }  
+        $qb = $qb->leftJoin('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i');        
+                    
+        $qb = $qb->orderBy('p.nomprest')->getQuery()->getResult(); 
+        return $qb;
     }
+    
+    public function findPrestLocCat($prest,$loc, $cat) {
+        $qb = $this->createQueryBuilder('p');
+        $qb = $qb->where($qb->expr()->like('p.nomprest', $qb->expr()->literal('%'.$prest.'%')))            
+            ->join('p.localite_id', 'l')->addSelect('l')->where('p.localite_id = :loc')
+            ->join('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i')
+            ->leftJoin('p.categories', 'c')->addSelect('c')->where('c.id = :cat')
+            ->orderBy('p.nomprest')->getQuery()
+                ->setParameter('loc', $loc)
+                ->setParameter('cat', $cat)
+                ->getResult();
+        return $qb;
+    }
+    
+    public function findPrestCat($prest,$cat) {
+        $qb = $this->createQueryBuilder('p');
+        $qb = $qb->where($qb->expr()->like('p.nomprest', $qb->expr()->literal('%'.$prest.'%')))   
+            ->join('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i')
+            ->leftJoin('p.categories', 'c')->addSelect('c')->where('c.id = :cat')
+            ->orderBy('p.nomprest')->getQuery()
+            ->setParameter('cat', $cat)
+            ->getResult();
+        return $qb;
+    }
+    
+    public function findLocCat($loc,$cat) {
+        $qb = $this->createQueryBuilder('p')
+            ->join('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i')         
+            ->join('p.localite_id', 'l')->addSelect('l')->where('p.localite_id = :loc')
+            ->leftJoin('p.categories', 'c')->addSelect('c')->where('c.id = :cat')
+            ->orderBy('p.nomprest')->getQuery()
+            ->setParameter('loc', $loc)
+            ->setParameter('cat', $cat)
+            ->getResult();
+        return $qb;
+    }
+    public function findPrestLoc($prest,$loc) {
+        $qb = $this->createQueryBuilder('p');
+        $qb = $qb->where($qb->expr()->like('p.nomprest', $qb->expr()->literal('%'.$prest.'%')))   
+            ->join('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i')         
+            ->join('p.localite_id', 'l')->addSelect('l')->where('p.localite_id = :loc')
+            ->orderBy('p.nomprest')->getQuery()
+            ->setParameter('loc', $loc)
+            ->getResult();
+        return $qb;
+    }
+    public function findPrest($prest) {
+        $qb = $this->createQueryBuilder('p');
+        $qb = $qb->where($qb->expr()->like('p.nomprest', $qb->expr()->literal('%'.$prest.'%')))   
+            ->join('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i')
+            ->orderBy('p.nomprest')->getQuery()
+            ->getResult();
+        return $qb;
+    }
+    public function findLoc($loc) {
+        $qb = $this->createQueryBuilder('p');
+        $qb = $qb->join('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i')         
+            ->join('p.localite_id', 'l')->addSelect('l')->where('p.localite_id = :loc')
+            ->orderBy('p.nomprest')->getQuery()
+            ->setParameter('loc', $loc)
+            ->getResult();
+        return $qb;
+    }
+    public function findCat($cat) {
+        $qb = $this->createQueryBuilder('p');
+        $qb = $qb->join('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i')    
+            ->leftJoin('p.categories', 'c')->addSelect('c')->where('c.id = :cat') 
+            ->orderBy('p.nomprest')->getQuery()
+            ->setParameter('cat', $cat)
+            ->getResult();
+        return $qb;
+    }
+    /*
+    $qb = $this->createQuieryBuilder('ar');
+$qb->addSelect([ 't', 'au' ])
+    ->join('ar.tags', 't')
+    ->join('ar.authors', 'au')
+    ->where($qb->expr()->in('ar.tags', ':tags'))
+    ->setParameter('tags', [ 1, 2 ]);*/
+    
 }   

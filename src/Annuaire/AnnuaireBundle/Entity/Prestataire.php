@@ -460,27 +460,27 @@ class Prestataire extends User
     }
 
     /**
-     * Add category
+     * Add categorie
      *
-     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
+     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $categorie
      *
      * @return Prestataire
      */
-    public function addCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
+    public function addCategorie(\Annuaire\AnnuaireBundle\Entity\Categorie $categorie)
     {
-        $this->categories[] = $category;
+        $this->categories[] = $categorie;
 
         return $this;
     }
 
     /**
-     * Remove category
+     * Remove categorie
      *
-     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
+     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $categorie
      */
-    public function removeCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
+    public function removeCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $categorie)
     {
-        $this->categories->removeElement($category);
+        $this->categories->removeElement($categorie);
     }
 
     /**

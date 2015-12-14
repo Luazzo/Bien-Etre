@@ -26,45 +26,31 @@ class SearchService {
     public function findPrestataire($prest,$loc, $cat){
        if($prest && $loc && $cat){
            // appelle fonction qui retrouve avec tous les paramètres
+           $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findPrestLocCat($prest,$loc,$cat);
        }else if($prest && $loc){
            // pas de catégorie
+           $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findPrestLoc($prest,$loc);
        }else if($loc && $cat){
            // pas de prestataire
+           $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findLocCat($loc,$cat);
        }else if($prest && $cat){
            //^pas de localite
+           $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findPrestCat($prest,$cat);
        }else if($prest){
-           
+           $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findPrest($prest);
        }else if($cat){
-           
+           $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findCat($cat);
        }else{
-           
+           $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findLoc($loc);
        }
-       
-       if($prest != null){
-                    $prest = trim($prest);
-                    $prestAbout = $em->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findPrest($prest,$loc,$cat);
-                    dump($prestAbout);
-                    exit;
-            }else{
-                if($loc != ""){
-                    
-                    $parLoc = $em->getRepository('AnnuaireAnnuaireBundle:Localite')->findParLoc($prest,$loc, $cat);
-                    
-                }else{
-                    if($cat != ""){
-                    
-                        $parCat = $em->getRepository('AnnuaireAnnuaireBundle:Categorie')->findParCat($cat);
-                        
-                    }
-                }
-            }
+
+        
+        dump($parCat);
+        exit;         
     }
     
     protected function findByAll($prest,$loc,$cat){
         $repo = $this->entityManager->getRepository("");
-        $repo = $this->entityMa
-        
-        
     }
     
    

@@ -47,20 +47,14 @@ class BienEtreController extends Controller
             // $_POST parameters   $request->request->get('name');
             
             // $_GET parameters
-            $prest = $request->query->get('prestataire',null);
-            $loc = $request->query->get('localite');
-            $cat = $request->query->get('categorie');
-            $prix = $request->query->get('prix');
+            $prest = $request->query->get(trim('prestataire',null));
+            $loc = $request->query->get('localite',null);
+            $cat = $request->query->get('categorie',null);
 
-                           
             $result = $this->get('bienetre.search_service')->findPrestataire($prest,$loc,$cat);
             
-            
-            
-            
-            
-            return $this->render('AnnuaireAnnuaireBundle:BienEtre:index.html.twig', array(
-                
+            return $this->render('AnnuaireAnnuaireBundle:BienEtre:listRecherche.html.twig', array(
+                    'result' => $result
                 ));
         }
     }
