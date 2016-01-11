@@ -6,11 +6,12 @@
 
     <div class="cards-wrapper">
         {% if lastPrests %}
+            {{dump(lastPrests)}}
             <div class="row">
             <div class="col-sm-8">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="card" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/prestataire-1.jpg')}}">
+                        <div class="card" data-background-image="{{ lastPrests[0].getImages[0].path}}">
                             <div class="card-label">
                                 <a href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}">{{ lastPrests[0].site }}</a>
                             </div><!-- /.card-label -->
@@ -32,7 +33,7 @@
 
                                 <div class="card-actions">
                                     <a class="fa fa-bookmark-o" href="#"></a>
-                                    <a class="fa fa-search" href="listing-detail.html"></a>
+                                    <a class="fa fa-search" href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}"></a>
                                     <a class="fa fa-heart-o" href="#"></a>
                                 </div>
 
@@ -43,7 +44,7 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="card" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/prestataire-2.jpg')}}">
+                        <div class="card" data-background-image="{{ lastPrests[1].getImages[0].path}}">
                             <div class="card-label">
                                 <a href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}">{{ lastPrests[0].site }}</a>
                             </div><!-- /.card-label -->
@@ -65,7 +66,7 @@
 
                                 <div class="card-actions">
                                     <a class="fa fa-bookmark-o" href="#"></a>
-                                    <a class="fa fa-search" href="listing-detail.html"></a>
+                                    <a class="fa fa-search" href="{{ path('prestataire_profil', { 'id' : lastPrests[1].id }) }}"></a>
                                     <a class="fa fa-heart-o" href="#"></a>
                                 </div>
 
@@ -74,7 +75,7 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <div class="card" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/prestataire-3.png')}}">
+                        <div class="card" data-background-image="{{ lastPrests[2].getImages[0].path}}">
                             <div class="card-label">
                                 <a href="{{ path('prestataire_profil', { 'id' : lastPrests[2].id }) }}">{{ lastPrests[2].site }}</a>
                             </div><!-- /.card-label -->
@@ -96,7 +97,7 @@
 
                                 <div class="card-actions">
                                     <a class="fa fa-bookmark-o" href="#"></a>
-                                    <a class="fa fa-search" href="listing-detail.html"></a>
+                                    <a class="fa fa-search" href="{{ path('prestataire_profil', { 'id' : lastPrests[2].id }) }}"></a>
                                     <a class="fa fa-heart-o" href="#"></a>
                                 </div>
 
@@ -107,7 +108,7 @@
             </div><!-- /.col-* -->
 
             <div class="col-sm-4">
-                <div class="card card-tall" data-background-image="{{ asset('bundles/annuaireannuaire/img/tmp/prestataire-4.jpg')}}">
+                <div class="card card-tall" data-background-image="{{ lastPrests[3].getImages[0].path}}">
                     <div class="card-label">
                         <a href="{{ path('prestataire_profil', { 'id' : lastPrests[3].id }) }}">{{ lastPrests[3].site }}</a>
                     </div><!-- /.card-label -->
@@ -129,7 +130,7 @@
 
                         <div class="card-actions">
                             <a class="fa fa-bookmark-o" href="#"></a>
-                            <a class="fa fa-search" href="listing-detail.html"></a>
+                            <a class="fa fa-search" href="{{ path('prestataire_profil', { 'id' : lastPrests[3].id }) }}"></a>
                             <a class="fa fa-heart-o" href="#"></a>
                         </div>
 

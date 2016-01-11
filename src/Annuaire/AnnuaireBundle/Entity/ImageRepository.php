@@ -10,8 +10,6 @@ namespace Annuaire\AnnuaireBundle\Entity;
  */
 class ImageRepository extends \Doctrine\ORM\EntityRepository
 {
-    
-    
     public function getSliderImages(){
         return $this->createQueryBuilder('i')
                     ->where("i.type = 'slidehome'")
@@ -19,4 +17,23 @@ class ImageRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult() ;
     }
+    public function getPrestSliderImages($id){
+        return $this->createQueryBuilder('i')
+                    ->where("i.type = 'slideprest'")
+                    ->andWhere("i.user = :id")
+                    ->setParameter('id', $id)
+                    ->orderBy('i.position', 'ASC')
+                    ->getQuery()
+                    ->getResult() ;
+    }
+    public function getPrestGalImages($id){
+        return $this->createQueryBuilder('i')
+                    ->where("i.type = 'galprest'")
+                    ->andWhere("i.user = :id")
+                    ->setParameter('id', $id)
+                    ->orderBy('i.position', 'ASC')
+                    ->getQuery()
+                    ->getResult() ;
+    }
+    
 }

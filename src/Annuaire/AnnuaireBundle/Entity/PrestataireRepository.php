@@ -18,6 +18,7 @@ class PrestataireRepository extends EntityRepository
                     ->leftJoin('p.codepost_id', 'cp')->addSelect('cp')
                     ->leftJoin('p.localite_id', 'l')->addSelect('l')
                     ->leftJoin('p.commune_id', 'c')->addSelect('c')
+                    ->leftJoin('p.images', 'i')->where("i.type = 'logo'")->addSelect('i')
                     ->orderBy('p.dateInscr', 'DESC')
                     ->setMaxResults($nmb)
                     ->getQuery()
@@ -31,6 +32,9 @@ class PrestataireRepository extends EntityRepository
                     ->leftJoin('p.promos', 'pr')->addSelect('pr')
                     ->leftJoin('p.stages', 'st')->addSelect('st')
                     ->leftJoin('p.categories', 'cat')->addSelect('cat')
+                    ->leftJoin('p.codepost_id', 'cp')->addSelect('cp')
+                    ->leftJoin('p.localite_id', 'l')->addSelect('l')
+                    ->leftJoin('p.commune_id', 'c')->addSelect('c')
                     ->leftJoin('p.images', 'i')->where("i.type = 'logo'")->andWhere("i.user = :id")->addSelect('i')
                     ->setParameter('id', $id)
                     ->getQuery()
@@ -40,32 +44,36 @@ class PrestataireRepository extends EntityRepository
     public function findPrestUni($prest,$loc, $cat)
     {
         $qb = $this->createQueryBuilder('p');
-        
         if($prest != null){
-            $qb = $qb->where($qb->expr()->like('p.nomprest', $qb->expr()->literal('%'.$prest.'%')));      
+            $qb = $qb->where($qb->expr()->like('p.nomprest', $qb->expr()->literal('%'.$prest.'%')));   
+            $qb = $qb->orWhere($qb->expr()->like('p.username', $qb->expr()->literal('%'.$prest.'%')));
             if($loc != null){
                 $qb = $qb->andWhere('p.localite_id = :loc')->setParameter('loc', $loc);
+            }else{
+                $qb = $qb->leftJoin('p.localite_id', 'l')->addSelect('l');
             }
         }else{
             if($loc != null){
                 $qb = $qb->where('p.localite_id = :loc')->setParameter('loc', $loc);
+            }else{
+                $qb = $qb->leftJoin('p.localite_id', 'l')->addSelect('l');
             }
         }        
-                if($cat != null){
-                    $qb = $qb->leftJoin('p.categories', 'c')->addSelect('c')->where('c.id = :cat')->setParameter('cat', $cat);
-                }  
-        $qb = $qb->leftJoin('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i');        
-                    
-        $qb = $qb->orderBy('p.nomprest')->getQuery()->getResult(); 
+        if($cat != null){
+            $qb = $qb->leftJoin('p.categories', 'c')->addSelect('c')->andWhere('c.id = :cat')->setParameter('cat', $cat);
+        }  
+       $qb = $qb->leftJoin('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i')   
+        ->orderBy('p.nomprest')->getQuery()->getResult(); 
         return $qb;
     }
-    
+    /*
     public function findPrestLocCat($prest,$loc, $cat) {
         $qb = $this->createQueryBuilder('p');
         $qb = $qb->where($qb->expr()->like('p.nomprest', $qb->expr()->literal('%'.$prest.'%')))            
             ->join('p.localite_id', 'l')->addSelect('l')->where('p.localite_id = :loc')
             ->join('p.images', 'i', "WITH", "i.type = 'logo'")->addSelect('i')
-            ->leftJoin('p.categories', 'c')->addSelect('c')->where('c.id = :cat')
+            ->leftJoin('p.categories', 'c')->addSelect('c')->andWhere('c.id = :cat')
+            //->leftJoin('p.categories', 'c','ON c.id = :cat')
             ->orderBy('p.nomprest')->getQuery()
                 ->setParameter('loc', $loc)
                 ->setParameter('cat', $cat)
@@ -130,13 +138,6 @@ class PrestataireRepository extends EntityRepository
             ->setParameter('cat', $cat)
             ->getResult();
         return $qb;
-    }
-    /*
-    $qb = $this->createQuieryBuilder('ar');
-$qb->addSelect([ 't', 'au' ])
-    ->join('ar.tags', 't')
-    ->join('ar.authors', 'au')
-    ->where($qb->expr()->in('ar.tags', ':tags'))
-    ->setParameter('tags', [ 1, 2 ]);*/
+    }*/
     
 }   

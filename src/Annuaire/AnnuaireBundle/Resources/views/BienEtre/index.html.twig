@@ -2,20 +2,18 @@
 
     {% block container %}
             
-        
-
             <!--4 DERNIERS PRESTATAIRES -->
-            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:titreETimagesEtoiles.html.twig' %}
+            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:derniersPrests.html.twig' %}
 
             <!--8 DERNIERS SERVICES-->
-            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:titreETgrosPaves.html.twig' %}                    
+            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:derniersServices.html.twig' %}   
+            
+            <!-- DERNIERS Stage-->
+            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:derniersStages.html.twig' %} 
 
             <!--COMMENTAIRES-->
             {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:expressions.html.twig' %}                
                 
-           
-            
-            
             <!--RECHERCHE-->
             {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:recherche.html.twig' %}
 

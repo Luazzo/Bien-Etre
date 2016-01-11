@@ -21,4 +21,15 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult() ;
     }
+    
+    public function getPrestComments($id)
+    {
+        return $this->createQueryBuilder('c')
+                    ->where("c.prestataire = :id")->setParameter('id', $id)
+                    ->leftJoin('c.membre', 'm')->addSelect('m')
+                    ->leftJoin('m.images', 'i')->andWhere("i.type = 'avatar'")->addSelect('i')
+                    ->orderBy('c.id', 'DESC')
+                    ->getQuery()
+                    ->getResult() ;
+    }
 }

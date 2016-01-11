@@ -1,1 +1,42 @@
+{% extends 'AnnuaireAnnuaireBundle:BienEtre:baseAnnuaire.html.twig' %}
 
+{% block container %}
+    <div class="page-title">
+        <h1>Le resultat de votre recherche</h1>
+    </div><!-- /.page-title -->
+    
+    {% if result %}
+        <div class="posts">
+            {% for r in result %}
+                <div class="post post-boxed">
+                    <div class="post-image">
+                        <img src="{{ r.getImages[0].path }}" alt="{{ r.nomprest }}">
+                        <a class="read-more" href="{{ path('prestataire_profil', { 'id' : r.id}) }}">Voir</a>
+                    </div><!-- /.post-image -->
+
+                    <div class="post-content">
+                        <h2><a href="{{ path('prestataire_profil', { 'id' : r.id}) }}">{{ r.nomprest }}<a></h2>
+                        <p>{{ r.rue }} &nbsp; {{ r.numero }} <br/>{{ r.codepostId.code }}, &nbsp; {{ r.localiteId.localite }}</p>
+                    </div><!-- /.post-content -->
+
+                    <div class="post-meta clearfix">
+                        <div class="post-meta-author"><a href="{{ r.site }}">{{ r.site }}</a></div><!-- /.post-meta-author -->
+                        <div class="post-meta-date">{{ r.tel }}</div><!-- /.post-meta-date -->
+                        <!-- <div class="post-meta-categories"><i class="fa fa-tags"></i> <a href="blog-detail.html">Restaurant</a></div>/.post-meta-categories -->
+                        <div class="post-meta-comments"><i class="fa fa-comments"></i> <a href="blog-detail.html">{{ r.site }}</a></div><!-- /.post-meta-comments -->
+                        <div class="post-meta-more"><a href="{{ path('prestataire_profil', { 'id' : r.id}) }}">Read More <i class="fa fa-chevron-right"></i></a></div><!-- /.post-meta-more -->
+                    </div><!-- /.post-meta -->
+                </div><!-- /.post -->
+            {% endfor %}
+        </div><!-- /.posts -->
+    {% else %}
+        <div class="post-content">
+            <h2>Aucun enregistrement</h2>
+        </div><!-- /.post-content -->
+    {% endif %}
+    
+    
+            <!--RECHERCHE-->
+            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:recherche.html.twig' %}
+    
+{% endblock %}

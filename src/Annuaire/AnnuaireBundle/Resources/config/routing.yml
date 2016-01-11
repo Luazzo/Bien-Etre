@@ -8,7 +8,7 @@ search:
     
 prestataire_profil:
     path:     /prestataire-profil/{id}
-    defaults: { _controller: AnnuaireAnnuaireBundle:User:showProfil }
+    defaults: { _controller: AnnuaireAnnuaireBundle:User:profilPrest }
     
 categorie_show:
     path:     /categorie/{id}
@@ -17,3 +17,5 @@ categorie_show:
 inscription_form:
     path:     /inscription
     defaults: { _controller: AnnuaireAnnuaireBundle:User:inscription }
+
+

@@ -6,3 +6,8 @@ services:
         class: Annuaire\AnnuaireBundle\Services\SearchService
         arguments: [@doctrine.orm.entity_manager]
        
+    general_user.registration.form.type:
+        class: Annuaire\AnnuaireBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: general_user_registration }

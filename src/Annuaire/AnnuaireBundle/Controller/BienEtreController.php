@@ -25,6 +25,7 @@ class BienEtreController extends Controller
         $slideImgs = $em->getRepository('AnnuaireAnnuaireBundle:Image')->getSliderImages();
         $localites = $em->getRepository('AnnuaireAnnuaireBundle:Localite')->getLocalites();
         $categs = $em->getRepository('AnnuaireAnnuaireBundle:Categorie')->getCategories();
+        $stages = $em->getRepository('AnnuaireAnnuaireBundle:Stage')->getLastStages(4);
         
         return $this->render('AnnuaireAnnuaireBundle:BienEtre:index.html.twig', 
             array(
@@ -35,8 +36,7 @@ class BienEtreController extends Controller
                 'localites' => $localites,
                 'categs' => $categs,
                 'listPrests' => $listPrests,
-                'localite' => "ok",
-                'prestAbout' => ""
+                'stages' => $stages
                 
             )
         );
@@ -53,9 +53,22 @@ class BienEtreController extends Controller
 
             $result = $this->get('bienetre.search_service')->findPrestataire($prest,$loc,$cat);
             
-            return $this->render('AnnuaireAnnuaireBundle:BienEtre:listRecherche.html.twig', array(
-                    'result' => $result
-                ));
+            
+            $em = $this->getDoctrine()->getManager();
+             //$result = $em->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findAll();
+            $slideImgs = $em->getRepository('AnnuaireAnnuaireBundle:Image')->getSliderImages();
+            $localites = $em->getRepository('AnnuaireAnnuaireBundle:Localite')->getLocalites();
+            $categs = $em->getRepository('AnnuaireAnnuaireBundle:Categorie')->getCategories();
+            
+            /*dump($result);
+            exit;*/
+            return $this->render('AnnuaireAnnuaireBundle:BienEtre:listRecherche.html.twig', 
+                    array(
+                        'slideImgs' => $slideImgs,
+                        'result' => $result,
+                        'localites' => $localites,
+                        'categs' => $categs,
+                    ));
         }
     }
     

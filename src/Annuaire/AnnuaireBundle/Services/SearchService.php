@@ -24,7 +24,7 @@ class SearchService {
     }
     
     public function findPrestataire($prest,$loc, $cat){
-       if($prest && $loc && $cat){
+       /*if($prest && $loc && $cat){
            // appelle fonction qui retrouve avec tous les paramètres
            $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findPrestLocCat($prest,$loc,$cat);
        }else if($prest && $loc){
@@ -42,11 +42,10 @@ class SearchService {
            $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findCat($cat);
        }else{
            $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findLoc($loc);
-       }
+       }*/
 
-        
-        dump($parCat);
-        exit;         
+        $parCat = $this->entityManager->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findPrestUni($prest,$loc, $cat);
+        return $parCat;       
     }
     
     protected function findByAll($prest,$loc,$cat){

@@ -20,6 +20,7 @@ class Image
     const TYPE_LOGO = 'logo';
     const TYPE_CATEGORIE = 'categorie';
     const TYPE_LOGOCATEG = 'logocateg';
+    const TYPE_GALPREST = 'galprest';
     
     
     

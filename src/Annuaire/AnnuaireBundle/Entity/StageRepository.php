@@ -10,4 +10,17 @@ namespace Annuaire\AnnuaireBundle\Entity;
  */
 class StageRepository extends \Doctrine\ORM\EntityRepository
 {
+    
+    
+    public function getLastStages($nmb){
+        return $this->createQueryBuilder('s')
+                    ->leftJoin('s.prestataire', 'p')->addSelect('p')
+                    ->leftJoin('p.localite_id', 'l')->addSelect('l')
+                    ->leftJoin('p.commune_id', 'c')->addSelect('c')
+                    ->leftJoin('p.images', 'i')->where("i.type = 'logo'")->addSelect('i')
+                    ->orderBy('p.dateInscr', 'DESC')
+                    ->setMaxResults($nmb)
+                    ->getQuery()
+                    ->getResult() ;
+    }
 }
