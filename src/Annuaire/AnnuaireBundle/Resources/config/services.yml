@@ -11,3 +11,7 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: general_user_registration }
+    user_creation_listener:
+        class: Annuaire\AnnuaireBundle\EventListeners\UserListener
+        tags:
+            - { name: kernel.event_subscriber }

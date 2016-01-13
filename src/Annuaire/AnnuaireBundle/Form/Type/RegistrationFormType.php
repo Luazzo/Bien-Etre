@@ -31,7 +31,7 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('typeUser', 'choice', array(
+            ->add('typeuser', 'choice', array(
             'label'=>'Type d\'utilisateur :',
             'translation_domain'=>'AnnuaireAnnuaireBundle',
             'choices'=>array(

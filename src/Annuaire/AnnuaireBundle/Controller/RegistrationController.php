@@ -11,17 +11,18 @@
 
 namespace Annuaire\AnnuaireBundle\Controller;
 
-use FOS\UserBundle\FOSUserEvents;
+use Annuaire\AnnuaireBundle\Entity\Membre;
+use Annuaire\AnnuaireBundle\Entity\Prestataire;
+use FOS\UserBundle\Controller\RegistrationController as baseController;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-use FOS\UserBundle\Controller\RegistrationController as baseController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use FOS\UserBundle\Model\UserInterface;
 
 /**
  * Controller managing the registration
@@ -39,13 +40,22 @@ class RegistrationController extends baseController
         $userManager = $this->get('fos_user.user_manager');
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
-
+        
         $user = $userManager->createUser();
+        /*
+        $type = $request->query->get('type');
+        $user = $userManager->createUser();
+        if($type == "prestataire"){
+            $user = new Prestataire ();
+        }else{
+            $user = new Membre ();
+        }
+        */
         $user->setEnabled(true);
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
-
+  
         if (null !== $event->getResponse()) {
             return $event->getResponse();
         }
@@ -56,15 +66,17 @@ class RegistrationController extends baseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-             $typeUser = $form->getData()->getTypeUser();
-                if ($typeUser === "Prestatire")
+             /*$typeUser = $form->getData()->getTypeuser();
+                if ($typeUser === "Prestataire")
                 {
                     $user->setRoles(array('ROLE_PRESTATAIRE'));
+                    $user->setTypeuser('prestataire');
                 }
                 else
                 {
                     $user->setRoles(array('ROLE_MEMBRE'));
-                }
+                    $user->setTypeuser('membre');
+                }*/
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
@@ -80,7 +92,7 @@ class RegistrationController extends baseController
             return $response;
         }
 
-        return $this->render('FOSUserBundle:Registration:register.html.twig', array(
+        return $this->render('AnnuaireAnnuaireBundle:Registration:register.html.twig', array(
             'form' => $form->createView(),
         ));
     }

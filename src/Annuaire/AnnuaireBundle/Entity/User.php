@@ -288,8 +288,8 @@ class User extends BaseUser
         return $this->typeUser;
     }
 
-    function setTypeuser($typeuser) {
-        $this->typeUser = $typeuser;
+    function setTypeuser($typeUser) {
+        $this->typeUser = $typeUser;
     }
     
     public function getFullName(){
