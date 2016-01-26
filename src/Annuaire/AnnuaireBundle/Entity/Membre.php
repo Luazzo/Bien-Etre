@@ -1,22 +1,22 @@
 <?php
 
-namespace Annuaire\AnnuaireBundle\Entity;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+    namespace Annuaire\AnnuaireBundle\Entity;
+    use Doctrine\Common\Collections\ArrayCollection;
+    use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
-class Membre extends User
-{
-    
-    public function __construct() {
-        $this->typeUser = User::Type_MEMBRE;       
-        
-        $this->notes = new ArrayCollection();    
-        $this->favorites = new ArrayCollection();    
-        parent::__construct();
-    }
+    /**
+     * @ORM\Entity
+     */
+    class Membre extends User
+    {
+
+        public function __construct() {
+            $this->typeUser = User::Type_MEMBRE;       
+
+            $this->notes = new ArrayCollection();    
+            $this->favorites = new ArrayCollection();    
+            parent::__construct();
+        }
     
     /**
      * @var ArrayCollection

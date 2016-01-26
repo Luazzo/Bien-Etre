@@ -14,5 +14,7 @@ categorie_show:
     path:     /categorie/{id}
     defaults: { _controller: AnnuaireAnnuaireBundle:BienEtre:showCateg }
     
-
+user_registration:
+    path:     /register/{type}
+    defaults: { _controller: AnnuaireAnnuaireBundle:Registration:register }
 

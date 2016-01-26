@@ -1,22 +1,22 @@
 <?php
 
-namespace Annuaire\AnnuaireBundle\Entity;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+    namespace Annuaire\AnnuaireBundle\Entity;
+    use Doctrine\Common\Collections\ArrayCollection;
+    use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\Entity\PrestataireRepository")
- */
-class Prestataire extends User
-{
-    public function __construct() {
-        $this->typeUser = User::Type_PRESTATAIRE;    
-        $this->stages = new ArrayCollection();  
-        $this->promos = new ArrayCollection();  
-        $this->categories = new ArrayCollection();
-        $this->favorites = new ArrayCollection();
-        parent::__construct();
-    }
+    /**
+     * @ORM\Entity(repositoryClass="Annuaire\AnnuaireBundle\Entity\PrestataireRepository")
+     */
+    class Prestataire extends User
+    {
+        public function __construct() {
+            $this->typeUser = User::Type_PRESTATAIRE;    
+            $this->stages = new ArrayCollection();  
+            $this->promos = new ArrayCollection();  
+            $this->categories = new ArrayCollection();
+            $this->favorites = new ArrayCollection();
+            parent::__construct();
+        }
     
     /**
      * @ORM\ManyToMany(targetEntity="Categorie", inversedBy="prestataires")

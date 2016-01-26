@@ -19,8 +19,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/data-fixtures": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "2.2.*@dev",
-        "stof/doctrine-extensions-bundle": "dev-master",
-        "gayalab/avalancheimagine": "dev-master"
+        "stof/doctrine-extensions-bundle": "dev-master"
+       
 
     },
     "require-dev": {

@@ -17,6 +17,8 @@ class BienEtreController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        
+            $orm = $em->getRepository('AnnuaireAnnuaireBundle:Prestataire')->findOneBy(array("id"=>33));
 
         $categories = $em->getRepository('AnnuaireAnnuaireBundle:Categorie')->findAllavecImg(8);
         $lastPrests = $em->getRepository('AnnuaireAnnuaireBundle:Prestataire')->getDerniers(4);
