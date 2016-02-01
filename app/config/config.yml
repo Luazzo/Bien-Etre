@@ -83,15 +83,9 @@ fos_user:
     db_driver: orm 
     firewall_name: main
     user_class: Annuaire\AnnuaireBundle\Entity\User
-    registration:
-        form:
-            type: general_user_registration
-        confirmation:
-            enabled:  true
-            from_email:
-                address: info@isl.be
-                sender_name: ISL
-            enabled: true
+    service: 
+        user_manager: bien_etre.user_manager
+    
             
    
 #stof_doctrine_extensions:

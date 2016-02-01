@@ -51,14 +51,14 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     protected $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
     protected $prenom;
 
@@ -68,12 +68,6 @@ class User extends BaseUser
      * @ORM\Column(name="dateInscr", type="datetime", nullable=true)
      */
     protected $dateInscr;
-
-    /**
-     * @var string
-     *
-     */
-    protected $typeUser;
 
     /**
      * @var boolean
@@ -283,15 +277,7 @@ class User extends BaseUser
     {
         return $this->images;
     }
-    
-    function getTypeuser() {
-        return $this->typeUser;
-    }
-
-    function setTypeuser($typeUser) {
-        $this->typeUser = $typeUser;
-    }
-    
+       
     public function getFullName(){
 	return sprintf("%s %s", $this->getFirstname(), $this->getLastname());
     }
