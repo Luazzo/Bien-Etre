@@ -8,12 +8,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 
 /**
- * Class CustomRegistrationFormFactory
+ * Class CustomProfileFormFactory
  * @package Annuaire\AnnuaireBundle\Form\Factory
  *
  * La classe qui se chargera de créer le formulaire d'enregistrement d'un utilisateur
  */
-class CustomRegistrationFormFactory {
+class CustomProfileFormFactory {
 
 	/**
 	 * @var $formFactory FormFactoryInterface
@@ -40,12 +40,12 @@ class CustomRegistrationFormFactory {
 	public function createForm( array $options = array(), $user_type) {
 		$options = array_merge( array( 'validation_groups' => $this->validationGroups ), $options );
 
-		$name = 'member_registration';
-		$type = 'member_registration';
+		$name = 'member_profile';
+		$type = 'member_profile';
 
 		if($user_type == 'prestataire'){
-			$name = 'prestataire_registration';
-			$type = 'prestataire_registration';
+			$name = 'prestataire_profile';
+			$type = 'prestataire_profile';
 		}
 		return $this->formFactory->createNamed($name, $type, null, $options);
 	}

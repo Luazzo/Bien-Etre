@@ -23,13 +23,23 @@
                         </ul><!-- /.header-nav-social -->
 
                         <ul class="header-nav-secondary nav nav-pills">
-                            <li><a href="{{path('fos_user_security_login')}}">Login</a></li>
-                            <li style="padding: 6px 15px 6px 15px; font-size: 12px;">Register
-                                <ul class="sub-menu">
-                                    <li><a href="{{path('fos_user_registration_register', { 'type' : 'prestataire'})}}">En tant que Prestataire</a></li>
-                                    <li><a href="{{path('fos_user_registration_register', { 'type' : 'membre'})}}">En tant que Membre</a></li>
-                                </ul>
-                            </li>
+
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <li id="my-li-menu">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} 
+                                <li>
+                                    <a href="{{ path('fos_user_security_logout') }}">
+                                        {{ 'layout.logout'|trans({},'FOSUserBundle') }}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({},'FOSUserBundle') }}</a></li>
+                                <li id="my-li-menu">Register
+                                    <ul class="sub-menu">
+                                        <li><a href="{{path('fos_user_registration_register', { 'type' : 'prestataire'})}}">En tant que Prestataire</a></li>
+                                        <li><a href="{{path('fos_user_registration_register', { 'type' : 'membre'})}}">En tant que Membre</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div><!-- /.header-top -->
 
@@ -88,7 +98,7 @@
                                         <a href="#">User Account</a>
 
                                         <ul>
-                                            <li><a href="user-profile-edit.html">Profile Edit</a></li>
+                                            <li><a href="{{path('fos_user_profile_show')}}">Profile</a></li> <!--TEMPLATE user-profile-edit.html-->
                                             <li><a href="login.html">Login Form</a></li>
                                             <li><a href="register.html">Register Form</a></li>
                                             <li><a href="change-password.html">Change Password Form</a></li>

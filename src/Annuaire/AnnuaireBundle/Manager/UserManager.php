@@ -8,10 +8,10 @@
 
 namespace Annuaire\AnnuaireBundle\Manager;
 
-
 use FOS\UserBundle\Doctrine\UserManager as FOSUserManager;
 use Annuaire\AnnuaireBundle\Entity\Membre;
 use Annuaire\AnnuaireBundle\Entity\Prestataire;
+use Annuaire\AnnuaireBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -23,7 +23,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserManager extends FOSUserManager{
 
-
 	/**
 	 * @param string $type
 	 *
@@ -32,13 +31,12 @@ class UserManager extends FOSUserManager{
 	 * renvoit la bonne classe utilisateur en fonction du type passé en paramètre
 	 */
     public function createUser($type="") {
-        if($type == 'prestataire'){
+        if($type == User::Type_PRESTATAIRE){
             return new Prestataire();
         }else{
             return new Membre();
         }
     }
-
 
     /**
      * {@inheritDoc}

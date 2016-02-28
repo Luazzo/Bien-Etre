@@ -15,6 +15,7 @@
             <link href="{{ asset('bundles/annuaireannuaire/libraries/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css">
             <link href="{{ asset('bundles/annuaireannuaire/libraries/bootstrap-fileinput/fileinput.min.css') }}" rel="stylesheet" type="text/css">
             <link href="{{ asset('bundles/annuaireannuaire/css/superlist.css') }}" rel="stylesheet" type="text/css" >
+            <link href="{{ asset('bundles/annuaireannuaire/css/main.css') }}" rel="stylesheet" type="text/css" >
         {% endblock %}
         
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
@@ -26,6 +27,8 @@
             <!--HEADER-MENU-->
             {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:header.html.twig' %}     
             
+                    
+                    
             <div class="main">
                 <div class="main-inner">
                     <div class="container">
@@ -121,7 +124,9 @@
             <script type="text/javascript" src="{{ asset('bundles/annuaireannuaire/libraries/bootstrap-fileinput/fileinput.min.js')}}"></script>
 
             <script src="{{ asset('bundles/annuaireannuaire/js/superlist.js')}}" type="text/javascript"></script>
+            <script type="text/javascript" src="{{asset("bundles/annuaireannuaire/js/codepostal.js")}}"></script>
         
         {% endblock %}
     </body>
 </html>
+

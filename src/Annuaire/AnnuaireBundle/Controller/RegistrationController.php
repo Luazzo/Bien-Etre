@@ -12,11 +12,11 @@
 namespace Annuaire\AnnuaireBundle\Controller;
 
 use FOS\UserBundle\Form\Type\RegistrationFormType;
+use Annuaire\AnnuaireBundle\Entity\User;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
-use ISL\BienEtreBundle\Form\ISLUserRegistration;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -32,12 +32,13 @@ use FOS\UserBundle\Model\UserInterface;
  */
 class RegistrationController extends Controller
 {
+    
     public function registerAction(Request $request)
     {
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->get('bien_etre.custom_form_factory'); // attention au nom du service custom
+        $formFactory = $this->get('bien_etre.custom_form_factory'); // attention au nom du service dans le service.yml
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-        $userManager = $this->get('fos_user.user_manager');
+        $userManager = $this->get('fos_user.user_manager'); // service surchargé dans service.yml de AnnuaireBundle
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
@@ -46,17 +47,19 @@ class RegistrationController extends Controller
 
         if($type==null){
             // si le type n'est pas présent, on vérifie en session si on en a pas stocké un temporairement
-            $type = $this->get('session')->get('type', 'membre');
+            $type = $this->get('session')->get('type', User::Type_MEMBRE);
         }else{
             // si un type est trouvé, on le stocke temporairement en session
              $this->get('session')->set('type', $type);
         }
+        
+        
         $user = $userManager->createUser($type);
         $user->setEnabled(true);
-
+        
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
-
+ 
         if (null !== $event->getResponse()) {
             return $event->getResponse();
         }
@@ -68,12 +71,22 @@ class RegistrationController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+             //$typeUser = $form->getData()->getType();
+            if ($type === "prestataire")
+            {
+                $user->setRoles(array('ROLE_PRESTATAIRE'));
+            }
+            else
+            {
+                $user->setRoles(array('ROLE_MEMBRE'));
+            }
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
             $userManager->updateUser($user);
+            
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_registration_confirmed');
+                $url = $this->generateUrl('fos_user_registration_confirm');
                 $response = new RedirectResponse($url);
             }
 

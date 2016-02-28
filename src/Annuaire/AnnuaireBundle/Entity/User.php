@@ -281,6 +281,10 @@ class User extends BaseUser
     public function getFullName(){
 	return sprintf("%s %s", $this->getFirstname(), $this->getLastname());
     }
-
+    /*
+    public function getType() {
+        return $this->typeUser;
+    }
+*/
 
 }

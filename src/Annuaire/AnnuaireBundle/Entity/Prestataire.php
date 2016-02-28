@@ -49,19 +49,19 @@
     private $promos;
     
     /**
-     * @ORM\OneToOne(targetEntity="Codepost")
+     * @ORM\ManyToOne(targetEntity="Codepost")
      * @ORM\JoinColumn(name="codepost_id", referencedColumnName="id")
      */
     private $codepost_id;
     
     /**
-     * @ORM\OneToOne(targetEntity="Commune")
+     * @ORM\ManyToOne(targetEntity="Commune")
      * @ORM\JoinColumn(name="commune_id", referencedColumnName="id")
      */
     private $commune_id;
     
     /**
-     * @ORM\OneToOne(targetEntity="Localite")
+     * @ORM\ManyToOne(targetEntity="Localite")
      * @ORM\JoinColumn(name="localite_id", referencedColumnName="id")
      */
     private $localite_id;
@@ -491,5 +491,19 @@
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \Annuaire\AnnuaireBundle\Entity\Categorie $category
+     *
+     * @return Prestataire
+     */
+    public function addCategory(\Annuaire\AnnuaireBundle\Entity\Categorie $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
     }
 }

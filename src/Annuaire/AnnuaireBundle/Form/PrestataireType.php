@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+
 class PrestataireType extends AbstractType
 {
     /**
@@ -22,12 +23,15 @@ class PrestataireType extends AbstractType
             ->add('tva')
             ->add('nom')
             ->add('prenom')
-            ->add('motPass')
             ->add('email')
-            ->add('codepost_id')
-            ->add('commune_id')
-            ->add('localite_id')
-            ->add('avatar')
+            ->add('localite_id', 'entity', array('class' => 'AnnuaireAnnuaireBundle:Localite', 'property' => 'localite', 'required' => false))
+            ->add('codepost_id','entity', array('class' => 'AnnuaireAnnuaireBundle:Codepost', 'choice_label' => 'code', 'property' => 'code', 'required' => false))
+            ->add('commune_id', 'entity', array('class' => 'AnnuaireAnnuaireBundle:Commune', 'choice_label' => 'commune', 'property' => 'commune', 'required' => false))
+            
+            /*->add('avatar','collection', array(
+                'type' => new ImagesType(),
+                'allow_add' => true
+                ))*/
         ;
     }
     

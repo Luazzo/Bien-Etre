@@ -8,9 +8,14 @@ services:
     # ATTENTION il faut faire référence à ce service dans le paramètre user_manager de la config du fos_user bundle dans config.yml   
     bien_etre.user_manager:
         class: Annuaire\AnnuaireBundle\Manager\UserManager
-        arguments: [@security.encoder_factory, @fos_user.util.username_canonicalizer,@fos_user.util.email_canonicalizer, @fos_user.entity_manager, Annuaire\AnnuaireBundle\Entity\User]
-        #calls:
-         #   - [ setRequestStack, [%request_stack%] ]
+        arguments: [@security.encoder_factory, @fos_user.util.username_canonicalizer, @fos_user.util.email_canonicalizer, @fos_user.object_manager, Annuaire\AnnuaireBundle\Entity\User]
+
+
+            
+# notre form factory Custom
+    bien_etre.custom_form_factory:
+        class: Annuaire\AnnuaireBundle\Form\Factory\CustomRegistrationFormFactory
+        arguments: [@form.factory, %fos_user.registration.form.validation_groups%]
             
  # le formulaire d'inscripion d'un prestataire
     prestataire.registration.form.type:
@@ -26,10 +31,32 @@ services:
         tags:
             - { name: form.type, alias: member_registration }
             
-# notre form factory Custom
-    bien_etre.custom_form_factory:
-      class: Annuaire\AnnuaireBundle\Form\Factory\CustomRegistrationFormFactory
-      arguments: [@form.factory, %fos_user.registration.form.validation_groups%]
+    # notre form factory Profile
+    bien_etre.profile_form_factory:
+      class: Annuaire\AnnuaireBundle\Form\Factory\CustomProfileFormFactory
+      arguments: [@form.factory, %fos_user.profile.form.validation_groups%]
+      
+            
+    membre.profile.form.factory:
+        class: Annuaire\AnnuaireBundle\Form\MemberProfileFormType
+        arguments: [Annuaire\AnnuaireBundle\Entity\Membre]
+        tags:
+            - { name: form.type, alias: member_profile }
+            
+    prestataire.profile.form.factory:
+        class: Annuaire\AnnuaireBundle\Form\PrestataireProfileFormType
+        arguments: [Annuaire\AnnuaireBundle\Entity\Prestataire]
+        tags:
+            - { name: form.type, alias: prestataire_profile }
+           
+    fos_user.doctrine_registry:
+        alias: doctrine
+        
+    bien_etre.registration_complet:
+     class: Annuaire\AnnuaireBundle\EventListeners\RegistrationConfirmListener
+     arguments: [@router]
+     tags:
+       - { name: kernel.event_subscriber }
 
 #    annuaire_annuaire.example:
 #        class: Annuaire\AnnuaireBundle\Example
