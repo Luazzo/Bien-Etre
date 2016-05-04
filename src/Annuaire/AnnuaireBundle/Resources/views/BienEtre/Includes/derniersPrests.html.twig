@@ -1,0 +1,157 @@
+<div class="block background-white background-transparent-image fullwidth">
+    <div class="page-header">
+        <h1>Nos Prestataires</h1>
+        <p>Check out the best places &amp; events in the city. Each one is worth<br> of visiting. Experience which you never forget.</p>
+    </div><!-- /.page-header -->
+
+    <div class="cards-wrapper">
+        {% if listPrests %}    
+            
+            <div class="row">
+                <ul>
+                    {% for prest in listPrests  %}
+                        <li>{{ prest.username|e }} <a href="{{ path('user_delete', {'id' : prest.id})  }}" >supprimer</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}         
+                        
+        {% if lastPrests %}    
+            <div class="row">
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card" data-background-image="{{ lastPrests[0].getImages[0].path}}">
+                            <div class="card-label">
+                                <a href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}">{{ lastPrests[0].site }}</a>
+                            </div><!-- /.card-label -->
+
+                            <div class="card-content">
+                                <h2><a href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}">{{ lastPrests[0].nomprest }}</a></h2>
+
+                                <div class="card-meta">
+                                    <i class="fa fa-map-o"></i> {{ lastPrests[0].getCodepostId.code }}  {{ lastPrests[0].getLocaliteId.localite }}
+                                </div><!-- /.card-meta -->
+
+                                <div class="card-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div><!-- /.card-rating -->
+
+                                <div class="card-actions">
+                                    <a class="fa fa-bookmark-o" href="#"></a>
+                                    <a class="fa fa-search" href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}"></a>
+                                    <a class="fa fa-heart-o" href="#"></a>
+                                </div>
+
+                            </div><!-- /.card-content -->
+                        </div><!-- /.card -->
+                    </div><!-- /.col-* -->
+                </div><!-- /.row -->
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card" data-background-image="{{ lastPrests[1].getImages[0].path}}">
+                            <div class="card-label">
+                                <a href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}">{{ lastPrests[0].site }}</a>
+                            </div><!-- /.card-label -->
+
+                            <div class="card-content">
+                                <h2><a href="{{ path('prestataire_profil', { 'id' : lastPrests[0].id }) }}">{{ lastPrests[0].nomprest }}</a></h2>
+
+                                <div class="card-meta">
+                                    <i class="fa fa-map-o"></i> {{ lastPrests[1].getCodepostId.code }}     {{ lastPrests[1].getLocaliteId.localite }}
+                                </div><!-- /.card-meta -->
+
+                                <div class="card-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div><!-- /.card-rating -->
+
+                                <div class="card-actions">
+                                    <a class="fa fa-bookmark-o" href="#"></a>
+                                    <a class="fa fa-search" href="{{ path('prestataire_profil', { 'id' : lastPrests[1].id }) }}"></a>
+                                    <a class="fa fa-heart-o" href="#"></a>
+                                </div>
+
+                            </div><!-- /.card-content -->
+                        </div><!-- /.card -->
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="card" data-background-image="{{ lastPrests[2].getImages[0].path}}">
+                            <div class="card-label">
+                                <a href="{{ path('prestataire_profil', { 'id' : lastPrests[2].id }) }}">{{ lastPrests[2].site }}</a>
+                            </div><!-- /.card-label -->
+
+                            <div class="card-content">
+                                <h2><a href="{{ path('prestataire_profil', { 'id' : lastPrests[2].id }) }}">{{ lastPrests[2].nomprest }}</a></h2>
+
+                                <div class="card-meta">
+                                    <i class="fa fa-map-o"></i> {{ lastPrests[2].getCodepostId.code }}    {{ lastPrests[2].getLocaliteId.localite }}
+                                </div><!-- /.card-meta -->
+
+                                <div class="card-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div><!-- /.card-rating -->
+
+                                <div class="card-actions">
+                                    <a class="fa fa-bookmark-o" href="#"></a>
+                                    <a class="fa fa-search" href="{{ path('prestataire_profil', { 'id' : lastPrests[2].id }) }}"></a>
+                                    <a class="fa fa-heart-o" href="#"></a>
+                                </div>
+
+                            </div><!-- /.card-content -->
+                        </div><!-- /.card -->
+                    </div><!-- /.col-* -->
+                </div><!-- /.row -->
+            </div><!-- /.col-* -->
+
+            <div class="col-sm-4">
+                <div class="card card-tall" data-background-image="{{ lastPrests[3].getImages[0].path}}">
+                    <div class="card-label">
+                        <a href="{{ path('prestataire_profil', { 'id' : lastPrests[3].id }) }}">{{ lastPrests[3].site }}</a>
+                    </div><!-- /.card-label -->
+
+                    <div class="card-content">
+                        <h2><a href="{{ path('prestataire_profil', { 'id' : lastPrests[3].id }) }}">{{ lastPrests[3].nomprest }}</a></h2>
+
+                        <div class="card-meta">
+                            <i class="fa fa-map-o"></i>{{ lastPrests[3].getCodepostId.code }}     {{ lastPrests[3].getLocaliteId.localite }}
+                        </div><!-- /.card-meta -->
+
+                        <div class="card-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div><!-- /.card-rating -->
+
+                        <div class="card-actions">
+                            <a class="fa fa-bookmark-o" href="#"></a>
+                            <a class="fa fa-search" href="{{ path('prestataire_profil', { 'id' : lastPrests[3].id }) }}"></a>
+                            <a class="fa fa-heart-o" href="#"></a>
+                        </div>
+
+                    </div><!-- /.card-content -->
+                </div><!-- /.card -->
+            </div><!-- /.col-* -->
+        </div><!-- /.row -->
+        {% else %}
+            pas de Prestataires enregistrés
+        {% endif %}
+        
+    </div><!-- /.cards-wrapper -->
+
+</div>

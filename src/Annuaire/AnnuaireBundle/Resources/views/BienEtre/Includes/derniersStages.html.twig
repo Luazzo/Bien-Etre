@@ -1,0 +1,38 @@
+<div class="block background-white background-transparent-image fullwidth">
+    <div class="page-header">
+        <h1>Les derniers stages</h1>
+        <p>Check out the best places &amp; events in the city. Each one is worth<br> of visiting. Experience which you never forget.</p>
+    </div><!-- /.page-header -->
+
+    <div class="cards-wrapper">
+        {% if stages %}
+            <div class="row">
+            <div class="col-sm-6">
+                {% for s in stages %}
+                    <div class="post">
+
+                        <div class="post-image">
+                            <a href="blog-detail.html">
+                                <img src="{{s.prestataire.images[0].path}}" height="50" weidth="auto" alt="{{s.prestataire.images[0].path}}">
+                            </a>
+                        </div><!-- /.post-image -->
+
+                        <div class="post-content">
+                            <p>{{s.datedebut|date("m/d/Y")}} - {{s.datefin|date("m/d/Y")}}</br></p><!-- /.post-date -->
+                            <h2><a href="blog-detail.html">{{s.nom}}</a></h2>
+                            <p>{{s.description}}</p>
+                        </div><!-- /.post-content -->
+
+                        <div class="post-more">
+                            <a href="blog-detail.html">Read More</a>
+                        </div><!-- /.post-date -->
+                    </div>
+                {% endfor %}
+            {% else %}
+                pas de Stages enregistrés
+            {% endif %}
+
+            </div><!-- /.row -->
+        </div><!-- /.cards-wrapper -->
+
+    </div>

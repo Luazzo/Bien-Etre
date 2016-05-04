@@ -1,0 +1,74 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+        <div class="main-inner">
+            <div class="content">
+                <div class="mt-150">
+                    <div class="hero-image">
+                        <div class="hero-image-inner" style='background-image: url("{{ asset('bundles/annuaireannuaire/img/tmp/slider-large-3.jpg') }}");'>
+                            
+                            <!--TEXT DANS LE HEADER DE MAIN-->
+                            {% include 'AnnuaireAnnuaireBundle:BienEtre:for_hero-image-content.html.twig' %}
+                            
+                            <!--% include 'AnnuaireAnnuaireBundle:BienEtre:search.html.twig' % FORMULAIRE DE RECHERCHE-->
+                            
+
+                            
+                        </div><!-- /.hero-image-inner -->
+                    </div><!-- /.hero-image -->
+                </div>
+                           
+                           
+
+                <div class="container">
+                    
+                    
+                            
+                <div class="user-inscription">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-1 col-sm-offset-8 col-lg-8 col-lg-offset-2">
+                                
+                                {{ form_start(form, {'method': 'POST'}) }}
+                                    {{ form_errors(form) }}
+                                    
+                                    <h2>Devenir un Membre</h2>
+
+                                    <div class="form-group">
+                                        {{ form_widget(form.nom, { 'attr': {'class': "form-control", 'type':"text", 'placeholder': "Nom"} }) }}
+                                    </div><!-- /.form-group -->
+
+                                    <div class="form-group">
+                                        {{ form_widget(form.prenom, { 'attr': {'class': "form-control", 'type':"text", 'placeholder': "Prénom"} }) }}
+                                    </div><!-- /.form-group -->
+
+                                    <div class="form-group">
+                                        {{ form_widget(form.motPass, { 'attr': {'class': "form-control", 'type':"password", 'placeholder': "Mot de pass"} }) }}
+                                    </div><!-- /.form-group -->
+
+                                    <div class="form-group">
+                                        {{ form_widget(form.email, { 'attr': {'class': "form-control", 'type':"email", 'placeholder': "Email"} }) }}
+                                    </div><!-- /.form-group -->
+
+                                    <button class="btn btn-primary btn-block" type="submit">S'inscrir</button>
+                                {{ form_end(form, {'render_rest': false}) }}
+                                
+                            </div><!-- /.col-* -->
+                        </div><!-- /.row -->
+                    </div><!-- /.container -->            
+                </div><!-- /.hero-image-form-wrapper-inscription -->                        
+                     
+
+                    
+
+                    <!--CONTACT-->
+                    {% include 'AnnuaireAnnuaireBundle:BienEtre:contact.html.twig' %}
+
+
+                </div><!-- /.container -->
+
+            </div><!-- /.content -->
+        </div><!-- /.main-inner -->
+    </div>
+{% endblock %}

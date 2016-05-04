@@ -1,0 +1,38 @@
+{% extends 'AnnuaireAnnuaireBundle:BienEtre:baseAnnuaire.html.twig' %}
+
+    {% block container %}
+            
+            <!--4 DERNIERS PRESTATAIRES -->
+            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:derniersPrests.html.twig' %}
+
+            <!--8 DERNIERS SERVICES-->
+            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:derniersServices.html.twig' %}   
+            
+            <!-- DERNIERS Stage-->
+            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:derniersStages.html.twig' %} 
+
+            <!--COMMENTAIRES-->
+            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:expressions.html.twig' %}                
+                
+            <!--RECHERCHE-->
+            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:recherche.html.twig' %}
+
+
+
+
+            <!--DES PETITS PAVES% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:petitsPaves.html.twig' %-->                    
+
+            <!--DES ANNONCES% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:annonces.html.twig' %-->                    
+
+            <!--DES SIGNAUX AVEC DES LIENS% include 'AnnuaireAnnuaireBundle/Includes:BienEtre:picturesLinks.html.twig' %-->
+
+            <!--TITRE AVEC DES PAVES-PRIX% include 'AnnuaireAnnuaireBundle/Includes:BienEtre:pavesPrix.html.twig' %-->
+
+            <!--LISTE DES CATEGORIES% include 'AnnuaireAnnuaireBundle/BienEtre:Includes:categories.html.twig' %-->
+
+
+            <!--CONTACT-->
+            {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:contact.html.twig' %}
+
+
+    {% endblock %}

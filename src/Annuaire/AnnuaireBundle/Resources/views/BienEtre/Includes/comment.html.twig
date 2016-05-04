@@ -1,0 +1,23 @@
+<div class="testimonial">
+    <div class="testimonial-image">
+        <img alt="" src="{{ lc.getMembre.getImages[0].path }}" alt="{{ lc.getMembre.prenom }}&nbsp;{{ lc.getMembre.nom }}">
+    </div><!-- /.testimonial-image -->
+
+    <div class="testimonial-inner">
+        <div class="testimonial-title">
+            <h2>{{ lc.titre }}</h2>
+
+            <div class="testimonial-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div><!-- /.testimonial-rating -->
+        </div><!-- /.testimonial-title -->
+
+        {{ lc.contenu }}
+
+        <div class="testimonial-sign">- {{ lc.getMembre.prenom }}&nbsp;{{ lc.getMembre.nom }}</div><!-- /.testimonial-sign -->
+    </div><!-- /.testimonial-inner -->
+</div><!-- /.testimonial -->

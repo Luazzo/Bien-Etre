@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+            <div class="content">
+                <div class="mt-150">
+                    <div class="hero-image">                        
+                     
+                        <!--SLIDER-->
+                        {% include 'AnnuaireAnnuaireBundle:BienEtre/Includes:sliderAnnuaire.html.twig' %}     
+                        
+                    </div><!-- /.hero-image -->
+                </div>
+                
+                <div class="container">
+                    {% block container %}
+                        <!-- Contenu -->
+                    {% endblock %}
+                </div><!-- /.container -->     
+
+            </div><!-- /.content -->
+{% endblock %}

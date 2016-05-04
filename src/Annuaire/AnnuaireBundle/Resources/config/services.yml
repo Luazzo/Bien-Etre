@@ -1,0 +1,77 @@
+services:
+    # appel de service pour les recherches
+    bienetre.search_service:
+        class: Annuaire\AnnuaireBundle\Services\SearchService
+        arguments: [@doctrine.orm.entity_manager]
+        
+    # custom user manager, méthode createUser ( RegistationController.php ) surchargée
+    # ATTENTION il faut faire référence à ce service dans le paramètre user_manager de la config du fos_user bundle dans config.yml   
+    bien_etre.user_manager:
+        class: Annuaire\AnnuaireBundle\Manager\UserManager
+        arguments: [@security.encoder_factory, @fos_user.util.username_canonicalizer, @fos_user.util.email_canonicalizer, @fos_user.object_manager, Annuaire\AnnuaireBundle\Entity\User]
+
+
+            
+# notre form factory Custom
+    bien_etre.custom_form_factory:
+        class: Annuaire\AnnuaireBundle\Form\Factory\CustomRegistrationFormFactory
+        arguments: [@form.factory, %fos_user.registration.form.validation_groups%]
+            
+ # le formulaire d'inscripion d'un prestataire
+    prestataire.registration.form.type:
+        class: Annuaire\AnnuaireBundle\Form\PrestataireRegistrationFormType
+        arguments: [Annuaire\AnnuaireBundle\Entity\Prestataire]
+        tags:
+            - { name: form.type, alias: prestataire_registration }
+            
+# le formaulaire d'inscription d'un membre
+    member.registration.form.type:
+        class: Annuaire\AnnuaireBundle\Form\MemberRegistrationFormType
+        arguments: [Annuaire\AnnuaireBundle\Entity\Membre]
+        tags:
+            - { name: form.type, alias: member_registration }
+            
+    # notre form factory Profile
+    bien_etre.profile_form_factory:
+      class: Annuaire\AnnuaireBundle\Form\Factory\CustomProfileFormFactory
+      arguments: [@form.factory, %fos_user.profile.form.validation_groups%]
+      
+            
+    membre.profile.form.factory:
+        class: Annuaire\AnnuaireBundle\Form\MemberProfileFormType
+        arguments: [Annuaire\AnnuaireBundle\Entity\Membre]
+        tags:
+            - { name: form.type, alias: member_profile }
+            
+    prestataire.profile.form.factory:
+        class: Annuaire\AnnuaireBundle\Form\PrestataireProfileFormType
+        arguments: [Annuaire\AnnuaireBundle\Entity\Prestataire]
+        tags:
+            - { name: form.type, alias: prestataire_profile }
+           
+    fos_user.doctrine_registry:
+        alias: doctrine
+        
+    bien_etre.registration_complet:
+     class: Annuaire\AnnuaireBundle\EventListeners\RegistrationConfirmListener
+     arguments: [@router]
+     tags:
+       - { name: kernel.event_subscriber }
+
+#    annuaire_annuaire.example:
+#        class: Annuaire\AnnuaireBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    #general_user.registration.form.type:
+    #    class: Annuaire\AnnuaireBundle\Form\Type\RegistrationFormType
+     #   arguments: [%fos_user.model.user.class%]
+     #   tags:
+    #        - { name: form.type, alias: general_user_registration }
+           
+ #   prestataire.registration.form.type:
+ #       class: Annuaire\AnnuaireBundle\Form\Type\RegistrationFormType
+ #       arguments: [Annuaire\AnnuaireBundle\Entity\Prestataire]
+#        tags:
+ #           - { name: form.type, alias: prestataire_registration }
+            
+            

@@ -1,0 +1,49 @@
+<div class="user-inscription">
+    
+    <div class="container">
+        <div class="row">
+            <div class="">
+                <form action="{{ path('search') }}" method="get" onsubmit="return formValid()">
+                    <h2>Start Searching</h2>
+
+                    <div class="hero-image-keyword form-group">
+                        <input  name="prestataire" id="prestataire" class="form-control" type="text" placeholder="Nom d'institut ou du prestataire">
+                    </div><!-- /.form-group -->
+
+                    <div class="hero-image-location form-group">
+                        <select name="localite"  id="localite" title="Location" class="form-control">
+                            {% if localites %}
+                                {% for l in localites %}
+                                    <option value="{{l.id}}">{{l.localite}}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                        
+                    </div><!-- /.form-group -->
+
+                    <div class="hero-image-category form-group">
+                        <select  name="categorie" id="categorie" title="Category" class="form-control">
+                            {% if categs %}
+                                {% for c in categs %}
+                                    <option value="{{c.id}}">{{c.nom}}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div><!-- /.form-group -->
+
+                    <!--<div class="hero-image-price form-group">
+                        <input  name="prix" class="form-control" type="text" placeholder="Prix maximal">
+                    </div> /.form-group -->
+
+                    <button class="btn btn-primary btn-block" type="submit" id="log">Search</button>
+                    
+                </form>
+            </div><!-- /.col-* -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+    
+        
+</div><!-- /.hero-image-form-wrapper -->
+
+
+<script src="{{ asset('bundles/annuaireannuaire/js/recherche.js')}}" type="text/javascript"></script>

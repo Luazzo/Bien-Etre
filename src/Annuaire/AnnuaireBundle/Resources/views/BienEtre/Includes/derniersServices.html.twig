@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h1>Services</h1>
+    <p>List of most recent interesting places and events in our directory submitted <br>by our users. Check whats going on in the city now.</p>
+</div><!-- /.page-header -->
+
+{% if categories %}
+    <div class="cards-simple-wrapper">
+        <div class="row">
+            
+        {% for c in categories %}
+        
+            <div class="col-sm-6 col-md-3">
+                
+                <div class="card-simple" data-background-image="{{ c.getImage.path }}">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="{{ path('categorie_show', { 'id' : c.id }) }}">{{ c.nom }}</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a class="fa fa-bookmark-o" href="#"></a>
+                                <a class="fa fa-search" href="{{ path('categorie_show', { 'id' : c.id }) }}"></a>
+                                <a class="fa fa-heart-o" href="#"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">{{ c.nom }}</div>
+
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+            
+        {%endfor%}
+
+        </div><!-- /.row -->
+    </div><!-- /.cards-simple-wrapper -->
+{% else %}
+    pas de Services enregistrés
+{% endif %}
+
+
